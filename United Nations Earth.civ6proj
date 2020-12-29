@@ -17,7 +17,7 @@
     <AssemblyName>AEP Earth</AssemblyName>
     <RootNamespace>AEP Earth</RootNamespace>
     <FrontEndActionData><![CDATA[<FrontEndActions><UpdateText id="AEPMapConfigText"><File>XML/Text.xml</File></UpdateText><UpdateDatabase id="UpdateMapConfig"><File priority="-1">SQL/Config.sql</File></UpdateDatabase></FrontEndActions>]]></FrontEndActionData>
-    <InGameActionData><![CDATA[<InGameActions><ImportFiles id="ImportMaps"><File priority="1">Maps/AEPEarth_Top.lua</File><File>Maps/AEPEarth_Bottom.lua</File><File>Maps/AEPEarth.lua</File><File>Maps/AEP_NewWorld.lua</File><File>Maps/AEP_AncientWorld.lua</File><File>Maps/AEP_Oceania.lua</File><File>Maps/AEP_Oceania_XP2.lua</File><File>Maps/AEP_NewWorld_XP2.lua</File><File>Maps/AEP_AncientWorld_XP2.lua</File><File>Maps/AEPEarth_Bottom_XP2.lua</File></ImportFiles><ImportFiles id="ImportScripts"><File>Scripts/AssignTrueStartingPlots.lua</File></ImportFiles><UpdateDatabase id="RemoveData"><Criteria>NotTrueStart</Criteria><File>XML/RemoveData.xml</File></UpdateDatabase></InGameActions>]]></InGameActionData>
+    <InGameActionData><![CDATA[<InGameActions><ImportFiles id="ImportMaps"><File priority="1">Maps/AEPEarth_Top.lua</File><File>Maps/AEPEarth_Bottom.lua</File><File>Maps/AEPEarth.lua</File><File>Maps/AEP_NewWorld.lua</File><File>Maps/AEP_AncientWorld.lua</File><File>Maps/AEP_Oceania.lua</File><File>Maps/AEP_Oceania_XP2.lua</File><File>Maps/AEP_NewWorld_XP2.lua</File><File>Maps/AEP_AncientWorld_XP2.lua</File><File>Maps/AEPEarth_Bottom_XP2.lua</File><File>Maps/AEPEarth_Top_XP2.lua</File></ImportFiles><ImportFiles id="ImportScripts"><File>Scripts/AssignTrueStartingPlots.lua</File></ImportFiles><UpdateDatabase id="RemoveData"><Criteria>NotTrueStart</Criteria><File>XML/RemoveData.xml</File></UpdateDatabase></InGameActions>]]></InGameActionData>
     <AssociationData><![CDATA[<Associations>
   <Reference type="Mod" title="CIVITAS North American City-States" id="f21cb4a7-0630-4900-ac67-212d9e7012ad" />
   <Reference type="Mod" title="TCS South American City-States" id="a3698d9f-cbf2-4e31-b045-d6aca1f0dbf0" />
@@ -46,6 +46,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Maps\AEPEarth_Top.lua">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Maps\AEPEarth_Top_XP2.lua">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Maps\AEP_AncientWorld.lua">
