@@ -5,7 +5,7 @@
 <GameInfo>
 
 	<Types>
-		<!-- City States that are blocked -->
+		<!-- City States that are blocking on TSL -->
 		<Delete Type="CIVILIZATION_PALENQUE"/>
 		<Delete Type="CIVILIZATION_BRUSSELS"/>
 		<Delete Type="CIVILIZATION_VALLETTA"/>
