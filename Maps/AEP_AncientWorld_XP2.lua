@@ -912,6 +912,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 	
 	return terrainTypes; 
 end
+
 ------------------------------------------------------------------------------
 function FeatureGenerator:AddIceToMap()
 	local iTargetIceTiles = (self.iGridH * self.iGridW *  (GlobalParameters.ICE_TILES_PERCENT + self.iIceModifiedPercent)) / 100;
