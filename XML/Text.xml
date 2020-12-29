@@ -30,10 +30,10 @@
 			<Text>An internally randomized map of The New World based on the AEP of Earth. (109x97)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_ANCIENT_WORLD_NAME">
-			<Text>[COLOR_RED]The Ancient World (AEP)[ENDCOLOR]</Text>
+			<Text>The Ancient World (AEP)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_ANCIENT_WORLD_DESCRIPTION">
-			<Text>An internally randomized map of The Ancient World based on the AEP of Earth. (110x128)[NEWLINE][ICON_Exclamation] [COLOR_RED]UNSTABLE in late game[ENDCOLOR][NEWLINE]Lower your graphic options to reduce random crashes.[NEWLINE]6+ GB of VRAM recommended</Text>
+			<Text>An internally randomized map of The Ancient World based on the AEP of Earth. (95x128)[NEWLINE][ICON_Exclamation]</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_OCEANIA_NAME">
 			<Text>Oceania (AEP)</Text>
