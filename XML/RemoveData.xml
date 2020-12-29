@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- RemoveData -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 4/2/2018 6:58:20 PM -->
+<GameInfo>
+
+	<Types>
+		<!-- City States that are blocked -->
+		<Delete Type="CIVILIZATION_PALENQUE"/>
+		<Delete Type="CIVILIZATION_BRUSSELS"/>
+		<Delete Type="CIVILIZATION_VALLETTA"/>
+		<Delete Type="CIVILIZATION_YEREVAN"/>
+		<Delete Type="CIVILIZATION_GRANADA"/>
+		<Delete Type="CIVILIZATION_BABYLON"/>
+		<Delete Type="CIVILIZATION_GRANADA"/>
+		<Delete Type="CIVILIZATION_AMSTERDAM"/>
+		<Delete Type="CIVILIZATION_VILNIUS"/>
+	</Types>
+</GameInfo>
