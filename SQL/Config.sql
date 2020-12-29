@@ -4,17 +4,22 @@
 --------------------------------------------------------------
 INSERT INTO Maps (File, Domain, Name, Description)
 VALUES 
+	/* standard maps */
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth.lua', 'StandardMaps', 'LOC_MAP_AEP_EARTH_NAME', 'LOC_MAP_AEP_EARTH_DESCRIPTION'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'StandardMaps', 'LOC_MAP_AEP_EARTH_TOP_NAME', 'LOC_MAP_AEP_EARTH_TOP_DESCRIPTION'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'StandardMaps', 'LOC_MAP_AEP_EARTH_BOTTOM_NAME', 'LOC_MAP_AEP_EARTH_BOTTOM_DESCRIPTION'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'StandardMaps', 'LOC_MAP_AEP_NEW_WORLD_NAME', 'LOC_MAP_AEP_NEW_WORLD_DESCRIPTION'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'StandardMaps', 'LOC_MAP_AEP_OCEANIA_NAME', 'LOC_MAP_AEP_OCEANIA_DESCRIPTION'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld.lua', 'StandardMaps', 'LOC_MAP_AEP_ANCIENT_WORLD_NAME', 'LOC_MAP_AEP_ANCIENT_WORLD_DESCRIPTION'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_OCEANIA_NAME', 'LOC_MAP_AEP_OCEANIA_DESCRIPTION');
+
+	/* GS maps */
+	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_OCEANIA_NAME', 'LOC_MAP_AEP_OCEANIA_DESCRIPTION'),
+	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_NEW_WORLD_NAME', 'LOC_MAP_AEP_NEW_WORLD_DESCRIPTION');
 
 INSERT INTO DomainValueFilters (Domain, Value, Filter)
 VALUES 
-	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'difference');
+	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'difference'),
+	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'difference');
 
 INSERT INTO Parameters (Key1, Key2, ParameterId, Name, Description, Domain, DefaultValue, ConfigurationGroup, ConfigurationId, GroupId, SortIndex)
 VALUES
@@ -31,6 +36,8 @@ VALUES
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
+	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
+	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 
 	-- world age
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
@@ -38,7 +45,9 @@ VALUES
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
-	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230);
+	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
+	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
+	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230);
 
 INSERT INTO MapLeaders (Map, LeaderType)
 VALUES
