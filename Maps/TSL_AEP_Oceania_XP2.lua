@@ -1,7 +1,7 @@
--- AEPEarth_Top_XP2
+-- TSL_AEP_Oceania_XP2
 -- Author: blkbutterfly74
--- DateCreated: 12/29/2020 9:05:25 PM
--- Creates a ginormous map of AEP Earth 
+-- DateCreated: 12/30/2020 5:23:54 AM
+-- Creates a ginormous map of Oceania as a subset of AEP  
 -- based off Scrambled Arctic map script
 -- Thanks to Gedemon for tips on how to debug, test and develop the full map
 -----------------------------------------------------------------------------
@@ -15,144 +15,69 @@ include "TerrainGenerator"
 include "NaturalWonderGenerator"
 include "ResourceGenerator"
 include "CoastalLowlands"
-include "AssignStartingPlots"
-
 include "AssignTrueStartingPlots"
 
 -- north pole
-local g_CenterX = 110;
-local g_CenterY = 0;
+local g_CenterX = 1;
+local g_CenterY = -31;
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
-	LEADER_GITARJA = {75, 21},
+	LEADER_KUPE = {88.2, 86},
 	LEADER_JOHN_CURTIN = {97, 59},
-	LEADER_JAYAVARMAN = {60, 13},
-	LEADER_HOJO = {39.6, 47.0},
-	LEADER_QIN = {42, 25},
-	LEADER_MONTEZUMA = {56, 174},
-	LEADER_MINOR_CIV_HONG_KONG = {50.7, 22.0},
-	LEADER_MINOR_CIV_JAKARTA = {65, 25},
-	LEADER_MINOR_CIV_LA_VENTA = {57, 178},
 	LEADER_MINOR_CIV_NAN_MADOL = {63, 69.86};
-	--LEADER_MINOR_CIV_SEOUL = {40, 36},
 	LEADER_MINOR_CIV_AUCKLAND = {100, 87},
-	-- LEADER_MINOR_CIV_PALENQUE cannot be placed cos of proximity to La Venta
-	LEADER_T_ROOSEVELT = {39.8, -162.5},
-	LEADER_SALADIN = {47.5, -59.7},
-	LEADER_PEDRO = {99.6, -146.5},
-	LEADER_CLEOPATRA = {47, -60.7},
-	LEADER_VICTORIA = {31, -91.8},
-	LEADER_CATHERINE_DE_MEDICI = {35, -91.6},
-	LEADER_BARBAROSSA = {32.1, -84.6},
-	LEADER_GORGO = {41.8, -69},
-	LEADER_PERICLES = {41.8, -68.7},
-	LEADER_GANDHI = {45.4, -14},
-	LEADER_MVEMBA = {75.9, -77.1},
-	LEADER_HARDRADA = {21.2, -81.9},
-	LEADER_TRAJAN = {39.1, -76.7},
-	LEADER_PETER_GREAT = {24.7, -68.6},
-	LEADER_TOMYRIS = {36.8, -22.4},
-	LEADER_PHILIP_II = {39.2, -95.9},
-	LEADER_GILGAMESH = {44.6, -45.9},
-	LEADER_ALEXANDER = {38.3, -70.1},
-	LEADER_CYRUS = {46.4, -37.1},
-	LEADER_AMANITORE = {60.2, -54.5},
-	LEADER_JADWIGA = {32.6, -72.1},
-	--LEADER_MINOR_CIV_AMSTERDAM = {30.1, -84.3}, 
-	--LEADER_MINOR_CIV_BRUSSELS cannot be placed cos of proximity to england, germany
-	--LEADER_MINOR_CIV_VALLETTA = {42.2, -76.3},
-	--LEADER_MINOR_CIV_GRANADA = {41, -92.7},
-	--LEADER_MINOR_CIV_BABYLON cannot be placed cos of proximity to persia
-	LEADER_POUNDMAKER = {26.6, 169.2},
-	LEADER_TAMAR = {36.8, -47.2},
-	LEADER_CHANDRAGUPTA = {48.2, -4.8},
-	LEADER_SEONDEOK = {40, 36.9},
-	LEADER_LAUTARO = {100.9, -162.1},
-	LEADER_GENGHIS_KHAN = {33.8, 19},
-	LEADER_WILHELMINA = {30.1, -84.3}, 
-	LEADER_ROBERT_THE_BRUCE = {27.2, -96.3},
-	LEADER_SHAKA = {91.9, -59.25},
-
-	-- cvs & tcs city states
-	CVS_LEADER_MINOR_CIV_CHETRO_KETL = {42.2, 166.3},
-	CVS_LEADER_MINOR_CIV_ETZANOA = {38.6, 169.6},
-	CVS_LEADER_MINOR_CIV_TAOS = {44.4, 165.7},
-	CVS_LEADER_MINOR_CIV_WYAM = {43.3, 161.2},
 };
 
 local g_iW, g_iH;
 local g_iFlags = {};
 local g_continentsFrac = nil;
-local g_iNumTotalLandTiles = 0; 
+local g_iNumTotalLandTiles = 0;
 local featuregen = nil;
 
 local landStrips = {
-		{0, 0, 36},
 		{0, 170, 198},
-		{1, 0, 35},
 		{1, 171, 198},
-		{2, 0, 34},
 		{2, 125, 131},
 		{2, 174, 198},
-		{3, 0, 33},
 		{3, 121, 133},
 		{3, 176, 198},
-		{4, 0, 31},
 		{4, 116, 118},
 		{4, 120, 126},
 		{4, 177, 198},
-		{5, 0, 30},
 		{5, 114, 118},
 		{5, 122, 123},
 		{5, 178, 198},
-		{6, 0, 28},
 		{6, 111, 119},
 		{6, 180, 198},
-		{7, 0, 27},
 		{7, 116, 118},
 		{7, 181, 198},
-		{8, 0, 26},
 		{8, 118, 119},
 		{8, 182, 198},
-		{9, 0, 25},
 		{9, 119, 120},
 		{9, 184, 198},
-		{10, 0, 23},
 		{10, 121, 121},
 		{10, 185, 198},
-		{11, 0, 23},
 		{11, 186, 198},
-		{12, 0, 22},
 		{12, 187, 198},
-		{13, 0, 21},
 		{13, 188, 198},
-		{14, 0, 19},
 		{14, 189, 198},
-		{15, 0, 18},
 		{15, 190, 198},
-		{16, 0, 17},
 		{16, 190, 198},
-		{17, 0, 17},
 		{17, 191, 198},
-		{18, 0, 16},
 		{18, 164, 164},
 		{18, 192, 198},
-		{19, 0, 15},
 		{19, 163, 166},
 		{19, 193, 198},
-		{20, 0, 14},
 		{20, 159, 159},
 		{20, 163, 167},
 		{20, 193, 198},
-		{21, 0, 13},
 		{21, 127, 127},
 		{21, 130, 130},
 		{21, 153, 153},
 		{21, 156, 161},
 		{21, 166, 167},
 		{21, 196, 198},
-		{22, 0, 12},
 		{22, 112, 113},
 		{22, 125, 125},
 		{22, 128, 128},
@@ -160,52 +85,36 @@ local landStrips = {
 		{22, 151, 164},
 		{22, 167, 168},
 		{22, 197, 198},
-		{23, 0, 11},
 		{23, 110, 110},
 		{23, 132, 132},
 		{23, 150, 165},
 		{23, 198, 198},
-		{24, 0, 10},
 		{24, 126, 126},
 		{24, 150, 166},
 		{24, 168, 168},
-		{25, 0, 9},
 		{25, 127, 127},
 		{25, 150, 168},
-		{26, 0, 9},
 		{26, 127, 128},
 		{26, 150, 169},
-		{27, 0, 8},
 		{27, 151, 170},
-		{28, 0, 8},
 		{28, 152, 171},
-		{29, 0, 7},
 		{29, 152, 172},
-		{30, 0, 7},
 		{30, 152, 173},
-		{31, 0, 6},
 		{31, 133, 133},
 		{31, 153, 172},
-		{32, 0, 5},
 		{32, 154, 173},
-		{33, 0, 4},
 		{33, 134, 135},
 		{33, 154, 173},
-		{34, 0, 4},
 		{34, 155, 175},
-		{35, 0, 3},
 		{35, 136, 136},
 		{35, 138, 138},
 		{35, 144, 144},
 		{35, 156, 173},
-		{36, 0, 2},
 		{36, 138, 138},
 		{36, 156, 176},
-		{37, 0, 1},
 		{37, 140, 140},
 		{37, 144, 144},
 		{37, 156, 177},
-		{38, 0, 1},
 		{38, 140, 140},
 		{38, 147, 148},
 		{38, 156, 177},
@@ -326,200 +235,7 @@ local landStrips = {
 		{73, 161, 161},
 		{73, 166, 166},
 		{73, 170, 170},
-		{73, 178, 178},
-		{74, 135, 138},
-		{74, 158, 159},
-		{74, 164, 164},
-		{74, 169, 174},
-		{75, 125, 125},
-		{75, 133, 140},
-		{75, 150, 150},
-		{75, 159, 159},
-		{75, 161, 161},
-		{75, 167, 175},
-		{75, 178, 179},
-		{76, 129, 131},
-		{76, 134, 134},
-		{76, 137, 137},
-		{76, 139, 144},
-		{76, 148, 148},
-		{76, 156, 159},
-		{76, 163, 164},
-		{76, 167, 175},
-		{76, 178, 179},
-		{77, 130, 133},
-		{77, 140, 143},
-		{77, 151, 151},
-		{77, 157, 159},
-		{77, 165, 165},
-		{77, 167, 175},
-		{77, 179, 180},
-		{78, 103, 103},
-		{78, 120, 120},
-		{78, 122, 122},
-		{78, 131, 132},
-		{78, 143, 143},
-		{78, 169, 176},
-		{78, 179, 180},
-		{79, 102, 102},
-		{79, 119, 120},
-		{79, 129, 129},
-		{79, 152, 154},
-		{79, 170, 176},
-		{79, 179, 180},
-		{80, 101, 101},
-		{80, 118, 120},
-		{80, 128, 129},
-		{80, 141, 142},
-		{80, 144, 144},
-		{80, 153, 154},
-		{80, 172, 176},
-		{80, 180, 180},
-		{81, 100, 100},
-		{81, 117, 120},
-		{81, 127, 128},
-		{81, 131, 136},
-		{81, 140, 142},
-		{81, 147, 151},
-		{81, 172, 177},
-		{81, 180, 181},
-		{82, 99, 99},
-		{82, 117, 119},
-		{82, 127, 127},
-		{82, 130, 142},
-		{82, 147, 155},
-		{82, 173, 176},
-		{82, 180, 181},
-		{83, 97, 99},
-		{83, 101, 103},
-		{83, 102, 103},
-		{83, 116, 118},
-		{83, 126, 142},
-		{83, 146, 156},
-		{83, 174, 175},
-		{83, 180, 181},
-		{84, 72, 77},
-		{84, 98, 104},
-		{84, 111, 116},
-		{84, 126, 141},
-		{84, 144, 144},
-		{84, 146, 157},
-		{84, 178, 178},
-		{84, 180, 181},
-		{85, 71, 78},
-		{85, 98, 104},
-		{85, 109, 116},
-		{85, 119, 120},
-		{85, 127, 142},
-		{85, 144, 157},
-		{85, 173, 173},
-		{85, 181, 181},
-		{86, 64, 79},
-		{86, 97, 103},
-		{86, 106, 106},
-		{86, 110, 122},
-		{86, 128, 158},
-		{86, 166, 167},
-		{86, 178, 179},
-		{87, 62, 64},
-		{87, 68, 81},
-		{87, 83, 85},
-		{87, 88, 89},
-		{87, 95, 104},
-		{87, 110, 161},
-		{87, 164, 168},
-		{87, 178, 181},
-		{88, 60, 62},
-		{88, 65, 104},
-		{88, 106, 159},
-		{88, 161, 161},
-		{88, 164, 169},
-		{88, 177, 181},
-		{89, 64, 103},
-		{89, 108, 159},
-		{89, 163, 170},
-		{89, 176, 176},
-		{89, 178, 181},
-		{90, 61, 105},
-		{90, 111, 160},
-		{90, 163, 170},
-		{90, 178, 180},
-		{91, 59, 104},
-		{91, 109, 109},
-		{91, 113, 169},
-		{91, 174, 175},
-		{91, 177, 180},
-		{92, 56, 103},
-		{92, 114, 169},
-		{92, 173, 175},
-		{92, 177, 179},
-		{93, 55, 102},
-		{93, 110, 110},
-		{93, 115, 168},
-		{93, 173, 174},
-		{93, 177, 179},
-		{94, 54, 99},
-		{94, 116, 168},
-		{94, 172, 174},
-		{94, 176, 177},
-		{95, 54, 98},
-		{95, 117, 167},
-		{95, 171, 173},
-		{95, 176, 177},
-		{95, 179, 179},
-		{96, 53, 97},
-		{96, 115, 115},
-		{96, 119, 172},
-		{96, 175, 176},
-		{97, 53, 95},
-		{97, 116, 116},
-		{97, 120, 170},
-		{97, 175, 176},
-		{97, 178, 178},
-		{98, 52, 94},
-		{98, 97, 97},
-		{98, 116, 117},
-		{98, 119, 167},
-		{98, 175, 175},
-		{99, 52, 56},
-		{99, 58, 92},
-		{99, 97, 98}, 
-		{99, 120, 166},
-		{99, 175, 175},
-		{100, 52, 54},
-		{100, 60, 92},
-		{100, 94, 95},
-		{100, 97, 97},
-		{100, 121, 166},
-		{101, 52, 53},
-		{101, 61, 92},
-		{101, 94, 96},
-		{101, 99, 100},
-		{101, 121, 167},
-		{102, 52, 53},
-		{102, 62, 92},
-		{102, 94, 96},
-		{102, 98, 98},
-		{102, 100, 100},
-		{102, 119, 164},
-		{102, 173, 173},
-		{103, 51, 53},
-		{103, 63, 91},
-		{103, 119, 163},
-		{103, 169, 170},
-		{104, 50, 53},
-		{104, 62, 93},
-		{104, 95, 96},
-		{104, 98, 98},
-		{104, 100, 100},
-		{104, 117, 117},
-		{104, 119, 162},
-		{105, 50, 54},
-		{105, 61, 84},
-		{105, 87, 94},
-		{105, 96, 96},
-		{105, 116, 117},
-		{105, 120, 162}};
+		{73, 178, 178}};
 
 -------------------------------------------------------------------------------
 function GenerateMap()
@@ -590,41 +306,22 @@ function GenerateMap()
 	}
 	local resGen = ResourceGenerator.Create(args);
 
-	local bTrueStart = MapConfiguration.GetValue("true_start");
+	print("Setting true start locations.");
 
-	if (bTrueStart) then
-		print("Setting true start locations.");
-
-		local args = {
-			TRUE_START_LOCATIONS = g_TSLs,
-			CENTER_X = g_CenterX,
-			CENTER_Y = g_CenterY,
-		};
-		local true_start_locations = AssignTrueStartingPlots.Create(args);
-	else
-		print("Creating start plot database.");
-
-		-- START_MIN_Y and START_MAX_Y is the percent of the map ignored for major civs' starting positions.
-		local startConfig = MapConfiguration.GetValue("start");-- Get the start config
-		local args = {
-			MIN_MAJOR_CIV_FERTILITY = 150,
-			MIN_MINOR_CIV_FERTILITY = 50, 
-			MIN_BARBARIAN_FERTILITY = 1,
-			START_MIN_Y = 15,
-			START_MAX_Y = 15,
-			START_CONFIG = startConfig,
-			WATER = true,
-		};
-		local start_plot_database = AssignStartingPlots.Create(args)
-	end
+	local args = {
+		TRUE_START_LOCATIONS = g_TSLs,
+		CENTER_X = g_CenterX,
+		CENTER_Y = g_CenterY,
+	};
+	local true_start_locations = AssignTrueStartingPlots.Create(args);
 
 	local GoodyGen = AddGoodies(g_iW, g_iH);
 end
 
 -- Input a Hash; Export width, height, and wrapX
 function GetMapInitData(MapSize)
-	local Width = 198;
-	local Height = 105;
+	local Width = 90;
+	local Height = 73;
 	return {Width = Width, Height = Height, WrapX = false}
 end
 
@@ -644,7 +341,7 @@ function GeneratePlotTypes(world_age)
 	end
 
 	-- Each land strip is defined by: Y, X Start, X End
-	local xOffset = 0;
+	local xOffset = -109;
 	local yOffset = 0;
 		
 	for i, v in ipairs(landStrips) do
@@ -1003,7 +700,7 @@ function FeatureGenerator:AddIceToMap()
 
 	local iPercentNeeded = 75;
 
-	-- poles
+	-- antarctic ice sheet core
 	for x = 0, self.iGridW - 1, 1 do
 		for y = self.iGridH - 1, 0, -1 do
 			local i = y * self.iGridW + x;
@@ -1177,6 +874,7 @@ function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
 		end
 	end
 end
+
 ------------------------------------------------------------------------------
 function AddFeaturesFromContinents()
 	print("Adding Features from Continents");

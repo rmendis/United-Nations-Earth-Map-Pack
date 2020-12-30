@@ -16,18 +16,9 @@ include "NaturalWonderGenerator"
 include "ResourceGenerator"
 include "AssignStartingPlots"
 
-include "AssignTrueStartingPlots"
-
 -- north pole
 local g_CenterX = 1;
 local g_CenterY = -31;
-
--- TSLs in polar coords (deg) from N.P.
-local g_TSLs = {
-	LEADER_JOHN_CURTIN = {97, 59},
-	LEADER_MINOR_CIV_NAN_MADOL = {64.3, 70};
-	LEADER_MINOR_CIV_AUCKLAND = {100, 87},
-};
 
 local g_iW, g_iH;
 local g_iFlags = {};
@@ -289,33 +280,20 @@ function GenerateMap()
 	}
 	local resGen = ResourceGenerator.Create(args);
 
-	local bTrueStart = MapConfiguration.GetValue("true_start");
+	print("Creating start plot database.");
 
-	if (bTrueStart) then
-		print("Setting true start locations.");
-
-		local args = {
-			TRUE_START_LOCATIONS = g_TSLs,
-			CENTER_X = g_CenterX,
-			CENTER_Y = g_CenterY,
-		};
-		local true_start_locations = AssignTrueStartingPlots.Create(args);
-	else
-		print("Creating start plot database.");
-
-		-- START_MIN_Y and START_MAX_Y is the percent of the map ignored for major civs' starting positions.
-		local startConfig = MapConfiguration.GetValue("start");-- Get the start config
-		local args = {
-			MIN_MAJOR_CIV_FERTILITY = 150,
-			MIN_MINOR_CIV_FERTILITY = 50, 
-			MIN_BARBARIAN_FERTILITY = 1,
-			START_MIN_Y = 15,
-			START_MAX_Y = 15,
-			START_CONFIG = startConfig,
-			WATER = true,
-		};
-		local start_plot_database = AssignStartingPlots.Create(args)
-	end
+	-- START_MIN_Y and START_MAX_Y is the percent of the map ignored for major civs' starting positions.
+	local startConfig = MapConfiguration.GetValue("start");-- Get the start config
+	local args = {
+		MIN_MAJOR_CIV_FERTILITY = 150,
+		MIN_MINOR_CIV_FERTILITY = 50, 
+		MIN_BARBARIAN_FERTILITY = 1,
+		START_MIN_Y = 15,
+		START_MAX_Y = 15,
+		START_CONFIG = startConfig,
+		WATER = true,
+	};
+	local start_plot_database = AssignStartingPlots.Create(args);
 
 	local GoodyGen = AddGoodies(g_iW, g_iH);
 end
