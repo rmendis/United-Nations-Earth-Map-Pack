@@ -33,19 +33,19 @@ function AssignTrueStartingPlots:__InitStartingData()
 				local i = self:__GetIndex(v[1], v[2]);
 				local pPlot = Map.GetPlotByIndex(i);
 
-				if (pPlayer == Game.GetLocalPlayer() and (pPlot:IsLake() or pPlot:IsMountain())) then 
-					error("Can't place TSL for local player");	-- have to throw exception
-				else	-- log error
+				if (pPlayer == Game.GetLocalPlayer() and (pPlot:IsLake() or pPlot:IsMountain())) then
+					error("Can't place TSL for local player", 2);	-- must throw exception
+				else
 					if (pPlot:IsMountain()) then
-						print("Mountain block TSL for ", leaderName); 
+						error("Mountain block TSL for " .. leaderName .. " at index: " .. i); 
 					elseif (pPlot:IsLake()) then
-						print("Lake block TSL for ", leaderName); 
+						error("Lake block TSL for " .. leaderName .. " at index: " .. i); 
 					else	-- o/w assign TSL
 						pPlayer:SetStartingPlot(pPlot);
+					
+						print("Assigning TSL for ", leaderName .. " at index: " .. i); 
 					end
 				end
-									
-				print("Assigning TSL for ", leaderName .. " at index: " .. i); 
 			end
 		end
 	end 
