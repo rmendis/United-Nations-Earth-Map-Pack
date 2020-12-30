@@ -47,6 +47,12 @@
 		<Row Tag="LOC_MAP_TSL_AEP_OCEANIA_DESCRIPTION">
 			<Text>An internally randomized map of Oceania based on the AEP of Earth with true starts. (90x73)</Text>
 		</Row>
+		<Row Tag="LOC_MAP_TSL_AEP_NEW_WORLD_NAME">
+			<Text>True Start Location New World (AEP)</Text>
+		</Row>
+		<Row Tag="LOC_MAP_TSL_AEP_NEW_WORLD_DESCRIPTION">
+			<Text>An internally randomized map of The New World based on the AEP of Earth with true starts. (109x97)</Text>
+		</Row>
 
 		<!-- Texts for Advanced Setup options -->
 		<Row Tag="LOC_MAP_TRUE_START_POSITION_NAME">

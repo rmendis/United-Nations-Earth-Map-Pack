@@ -1,6 +1,6 @@
--- AEP_NewWorld
+-- TSL_AEP_NewWorld
 -- Author: blkbutterfly74
--- DateCreated: 1/27/2018 12:30:32 PM
+-- DateCreated: 12/30/2020 2:48:22 PM
 -- Creates a map of the New World
 -- based off United Nations Earth map script
 -----------------------------------------------------------------------------
@@ -13,11 +13,42 @@ include "FeatureGenerator"
 include "TerrainGenerator"
 include "NaturalWonderGenerator"
 include "ResourceGenerator"
-include "AssignStartingPlots"
+include "AssignTrueStartingPlots"
 
 -- north pole
 local g_CenterX = 110;
 local g_CenterY = 68;
+
+-- TSLs in polar coords (deg) from N.P.
+local g_TSLs = {
+	LEADER_MONTEZUMA = {58, -178},
+	LEADER_MINOR_CIV_LA_VENTA = {57, 178},
+	-- LEADER_MINOR_CIV_PALENQUE cannot be placed cos of proximity to La Venta
+	LEADER_T_ROOSEVELT = {39.8, -162.5},
+	LEADER_T_ROOSEVELT_ROUGHRIDER = {39.8, -162.5},
+	LEADER_PEDRO = {99.6, -146.5},
+	LEADER_MINOR_CIV_BUENOS_AIRES = {102.9, -154.7},
+	LEADER_MINOR_CIV_TORONTO = {37.1, -166},
+	LEADER_LADY_SIX_SKY = {61.4, -173.5},
+	LEADER_SIMON_BOLIVAR = {68, -162.9},
+	LEADER_MINOR_CIV_CAGUANA = {56.6, -159.3},
+	--LEADER_MINOR_CIV_CAHOKIA = {39, -178.5},    -- GS
+	--LEADER_MINOR_CIV_MEXICO_CITY = {58, -178},	-- GS and blocks Aztecs
+	--LEADER_MINOR_CIV_NAZCA = {83.5, -161},	-GS
+	LEADER_POUNDMAKER = {30.4, 163},
+
+	-- cvs & tcs city states
+	CVS_LEADER_MINOR_CIV_CHETRO_KETL = {42.2, 166.3},
+	CVS_LEADER_MINOR_CIV_ETZANOA = {38.6, 169.6},
+	CVS_LEADER_MINOR_CIV_IQUALUIT = {20.6, -157.2},
+	CVS_LEADER_MINOR_CIV_TAOS = {44.4, 165.7},
+	CVS_LEADER_MINOR_CIV_TUNERIUT = {19.2, -171},		-- fixed
+	CVS_LEADER_MINOR_CIV_WYAM = {43.3, 161.2},
+	TCS_LEADER_MINOR_CIV_CHAN_CHAN = {76.7, -168},
+	TCS_LEADER_MINOR_CIV_GUAPONDELIG = {72.6, -168.1},
+	TCS_LEADER_MINOR_CIV_KUHIKUGU = {78.8, -146.9},
+	TCS_LEADER_MINOR_CIV_TEYUNA = {62.3, -161.3},
+};
 
 local g_iW, g_iH;
 local g_iFlags = {};
@@ -386,20 +417,14 @@ function GenerateMap()
 	}
 	local resGen = ResourceGenerator.Create(args);
 
-	print("Creating start plot database.");
+	print("Setting true start locations.");
 
-	-- START_MIN_Y and START_MAX_Y is the percent of the map ignored for major civs' starting positions.
-	local startConfig = MapConfiguration.GetValue("start");-- Get the start config
 	local args = {
-		MIN_MAJOR_CIV_FERTILITY = 150,
-		MIN_MINOR_CIV_FERTILITY = 50, 
-		MIN_BARBARIAN_FERTILITY = 1,
-		START_MIN_Y = 15,
-		START_MAX_Y = 15,
-		START_CONFIG = startConfig,
-		WATER = true,
+		TRUE_START_LOCATIONS = g_TSLs,
+		CENTER_X = g_CenterX,
+		CENTER_Y = g_CenterY,
 	};
-	local start_plot_database = AssignStartingPlots.Create(args);
+	local true_start_locations = AssignTrueStartingPlots.Create(args);
 
 	local GoodyGen = AddGoodies(g_iW, g_iH);
 end

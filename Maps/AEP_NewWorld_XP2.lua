@@ -24,7 +24,7 @@ local g_CenterY = 68;
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
-	LEADER_MONTEZUMA = {56, 174},
+	LEADER_MONTEZUMA = {58, -178},
 	LEADER_MINOR_CIV_LA_VENTA = {57, 178},
 	-- LEADER_MINOR_CIV_PALENQUE cannot be placed cos of proximity
 	LEADER_T_ROOSEVELT = {39.8, -162.5},
