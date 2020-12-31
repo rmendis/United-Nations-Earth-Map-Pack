@@ -17,86 +17,9 @@ include "ResourceGenerator"
 include "CoastalLowlands"
 include "AssignStartingPlots"
 
-include "AssignTrueStartingPlots"
-
 -- north pole
 local g_CenterX = 21;
 local g_CenterY = 94;
-
--- TSLs in polar coords (deg) from N.P.
-local g_TSLs = {
-	LEADER_GITARJA = {75, 21},
-	LEADER_JAYAVARMAN = {60, 13},
-	LEADER_HOJO = {39.6, 47.0},
-	LEADER_QIN = {42, 25},
-	LEADER_MINOR_CIV_HONG_KONG = {50.7, 22.0},
-	LEADER_MINOR_CIV_JAKARTA = {65, 25},
-	--LEADER_MINOR_CIV_SEOUL = {40, 36},
-	-- LEADER_MINOR_CIV_PALENQUE cannot be placed cos of proximity to La Venta
-	LEADER_SALADIN = {47.5, -59.7},
-	LEADER_CLEOPATRA = {47, -60.7},
-	LEADER_VICTORIA = {31, -91.8},
-	LEADER_CATHERINE_DE_MEDICI = {35, -91.6},
-	LEADER_CATHERINE_DE_MEDICI_ALT = {35, -91.6},
-	LEADER_BARBAROSSA = {32.1, -84.6},
-	LEADER_GORGO = {41.8, -69},
-	LEADER_PERICLES = {41.8, -68.7},
-	LEADER_GANDHI = {45.4, -14},
-	LEADER_MVEMBA = {75.9, -77.1},
-	LEADER_HARDRADA = {21.2, -81.9},
-	LEADER_TRAJAN = {39.1, -76.7},
-	LEADER_PETER_GREAT = {24.7, -68.6},
-	LEADER_TOMYRIS = {36.8, -22.4},
-	LEADER_PHILIP_II = {39.2, -95.9},
-	LEADER_GILGAMESH = {44.6, -45.9},
-	LEADER_ALEXANDER = {38.3, -70.1},
-	LEADER_CYRUS = {46.4, -37.1},
-	LEADER_AMANITORE = {60.2, -54.5},
-	LEADER_JADWIGA = {32.6, -72.1},
-	--LEADER_MINOR_CIV_AMSTERDAM = {30.1, -84.3}, 
-	--LEADER_MINOR_CIV_BRUSSELS cannot be placed cos of proximity to england, germany
-	LEADER_MINOR_CIV_CARTHAGE = {43.6, -80.8},
-	LEADER_MINOR_CIV_GENEVA = {36.1, -85.2},
-	LEADER_MINOR_CIV_HATTUSA = {39.4, -59.5},
-	LEADER_MINOR_CIV_JERUSALEM = {46, -55.6},
-	LEADER_MINOR_CIV_KABUL = {42, -25.4},
-	LEADER_MINOR_CIV_KANDY = {64.1, -10.8},
-	LEADER_MINOR_CIV_KUMASI = {65.1, -92.6},
-	LEADER_MINOR_CIV_LISBON = {42.4, -98.1},
-	LEADER_MINOR_CIV_MOHENJO_DARO = {52.5, -17.8},
-	LEADER_MINOR_CIV_PRESLAV = {38.5, -65.4},
-	LEADER_MINOR_CIV_STOCKHOLM = {24.7, -76},
-	--LEADER_MINOR_CIV_VALLETTA = {42.2, -76.3},
-	--LEADER_MINOR_CIV_VILNIUS = {29.7, -70.3}, removed cos blocked freq. by europeans
-	--LEADER_MINOR_CIV_YEREVAN = {40.4, -48}, removed cos of proximity to Georgia
-	LEADER_MINOR_CIV_ZANZIBAR = {75.6, -52.5},
-	LEADER_MINOR_CIV_ANTANANARIVO = {85.6, -43.6},
-	LEADER_MINOR_CIV_ARMAGH = {30.4, -99.5},
-	--LEADER_MINOR_CIV_GRANADA = {41, -92.7},
-	LEADER_MINOR_CIV_MUSCAT = {52.7, -33.4},
-	LEADER_MINOR_CIV_ANTIOCH = {37.5, -78.7},		-- Venice
-	LEADER_MINOR_CIV_BABYLON = {48.4, 38.3},	-- anshan
-	LEADER_TAMAR = {36.8, -47.2},
-	LEADER_CHANDRAGUPTA = {48.2, -4.8},
-	LEADER_SEONDEOK = {40, 36.9},
-	LEADER_GENGHIS_KHAN = {33.8, 19},
-	LEADER_WILHELMINA = {30.1, -84.3}, 
-	LEADER_ROBERT_THE_BRUCE = {27.2, -96.3},
-	LEADER_SHAKA = {91.9, -59.25},
-	LEADER_MINOR_CIV_AYUTTHAYA = {57.7, 9},
-	LEADER_MINOR_CIV_CHINGUETTI = {57.5, -103.1},
-	LEADER_MINOR_CIV_JOHANNESBURG = {87.7, -61.4},
-	LEADER_MINOR_CIV_LAHORE = {47.1, -17.3},
-	--LEADER_MINOR_CIV_NALANDA cannot be placed due to proximity to Chandragupta (Patna)
-	LEADER_MINOR_CIV_SAMARKAND = {41, -28},
-	LEADER_MINOR_CIV_SINGAPORE = {67.5, 11.98},
-	LEADER_MINOR_CIV_TARUGA = {64.4, -83.76},
-	--LEADER_MINOR_CIV_VATICAN_CITY blocked by Rome
-	LEADER_MINOR_CIV_WOLIN = {29.6, -78.31},
-	LEADER_AMBIORIX = {31.1, -86.3},
-	LEADER_BASIL = {39.8, -64.72},
-	LEADER_MENELIK = {64.7, -50.65},
-};
 
 local g_iW, g_iH;
 local g_iFlags = {};
@@ -543,33 +466,20 @@ function GenerateMap()
 	}
 	local resGen = ResourceGenerator.Create(args);
 
-	local bTrueStart = MapConfiguration.GetValue("true_start");
+	print("Creating start plot database.");
 
-	if (bTrueStart) then
-		print("Setting true start locations.");
-
-		local args = {
-			TRUE_START_LOCATIONS = g_TSLs,
-			CENTER_X = g_CenterX,
-			CENTER_Y = g_CenterY,
-		};
-		local true_start_locations = AssignTrueStartingPlots.Create(args);
-	else
-		print("Creating start plot database.");
-
-		-- START_MIN_Y and START_MAX_Y is the percent of the map ignored for major civs' starting positions.
-		local startConfig = MapConfiguration.GetValue("start");-- Get the start config
-		local args = {
-			MIN_MAJOR_CIV_FERTILITY = 150,
-			MIN_MINOR_CIV_FERTILITY = 50, 
-			MIN_BARBARIAN_FERTILITY = 1,
-			START_MIN_Y = 15,
-			START_MAX_Y = 15,
-			START_CONFIG = startConfig,
-			WATER = true,
-		};
-		local start_plot_database = AssignStartingPlots.Create(args)
-	end
+	-- START_MIN_Y and START_MAX_Y is the percent of the map ignored for major civs' starting positions.
+	local startConfig = MapConfiguration.GetValue("start");-- Get the start config
+	local args = {
+		MIN_MAJOR_CIV_FERTILITY = 150,
+		MIN_MINOR_CIV_FERTILITY = 50, 
+		MIN_BARBARIAN_FERTILITY = 1,
+		START_MIN_Y = 15,
+		START_MAX_Y = 15,
+		START_CONFIG = startConfig,
+		WATER = true,
+	};
+	local start_plot_database = AssignStartingPlots.Create(args);
 
 	local GoodyGen = AddGoodies(g_iW, g_iH);
 end
