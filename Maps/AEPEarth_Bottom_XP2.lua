@@ -75,8 +75,8 @@ local g_TSLs = {
 	LEADER_MINOR_CIV_ARMAGH = {30.4, -99.5},
 	--LEADER_MINOR_CIV_GRANADA = {41, -92.7},
 	LEADER_MINOR_CIV_MUSCAT = {52.7, -33.4},
-	--LEADER_MINOR_CIV_ANTIOCH = {43.8, -55.2}, cannot be placed due to proximity to Jerusalem
-	--LEADER_MINOR_CIV_BABYLON cannot be placed cos of proximity to persia
+	LEADER_MINOR_CIV_ANTIOCH = {37.5, -78.7},		-- Venice
+	LEADER_MINOR_CIV_BABYLON = {48.4, 38.3},	-- anshan
 	LEADER_POUNDMAKER = {30.4, 163},
 	LEADER_TAMAR = {36.8, -47.2},
 	LEADER_CHANDRAGUPTA = {48.2, -4.8},

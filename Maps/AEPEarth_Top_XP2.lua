@@ -63,7 +63,7 @@ local g_TSLs = {
 	--LEADER_MINOR_CIV_BRUSSELS cannot be placed cos of proximity to england, germany
 	--LEADER_MINOR_CIV_VALLETTA = {42.2, -76.3},
 	--LEADER_MINOR_CIV_GRANADA = {41, -92.7},
-	--LEADER_MINOR_CIV_BABYLON cannot be placed cos of proximity to persia
+	LEADER_MINOR_CIV_BABYLON = {48.4, 38.3},	-- anshan
 	LEADER_POUNDMAKER = {30.4, 163},
 	LEADER_TAMAR = {36.8, -47.2},
 	LEADER_CHANDRAGUPTA = {48.2, -4.8},

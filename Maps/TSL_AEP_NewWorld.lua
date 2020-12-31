@@ -37,6 +37,7 @@ local g_TSLs = {
 	--LEADER_MINOR_CIV_NAZCA = {83.5, -161},	-GS
 	LEADER_POUNDMAKER = {30.4, 163},
 	LEADER_LAUTARO = {99.3, -161.2},
+	-- LEADER_MINOR_CIV_HUNZA blocked by Gran Colombia
 
 	-- cvs & tcs city states
 	CVS_LEADER_MINOR_CIV_CHETRO_KETL = {42.2, 166.3},

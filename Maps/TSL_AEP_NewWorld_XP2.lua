@@ -40,6 +40,7 @@ local g_TSLs = {
 	LEADER_LAUTARO = {99.3, -161.2},
 	LEADER_PACHACUTI = {83, -160.5},
 	LEADER_LAURIER = {37.1, -166},
+	-- LEADER_MINOR_CIV_HUNZA blocked by Gran Colombia
 
 	-- cvs & tcs city states
 	CVS_LEADER_MINOR_CIV_CHETRO_KETL = {42.2, 166.3},

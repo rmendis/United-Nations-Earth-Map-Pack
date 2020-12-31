@@ -16,74 +16,9 @@ include "NaturalWonderGenerator"
 include "ResourceGenerator"
 include "AssignStartingPlots"
 
-include "AssignTrueStartingPlots"
-
 -- north pole
 local g_CenterX = 21;
 local g_CenterY = 94;
-
--- TSLs in polar coords (deg) from N.P.
-local g_TSLs = {
-	LEADER_GITARJA = {75, 21},
-	LEADER_JOHN_CURTIN = {97, 59},
-	LEADER_JAYAVARMAN = {60, 13},
-	LEADER_HOJO = {39.6, 47.0},
-	LEADER_QIN = {42, 25},
-	LEADER_MINOR_CIV_HONG_KONG = {50.7, 22.0},
-	LEADER_MINOR_CIV_JAKARTA = {65, 25},
-	--LEADER_MINOR_CIV_SEOUL = {40, 36},
-	-- LEADER_MINOR_CIV_PALENQUE cannot be placed cos of proximity to La Venta
-	LEADER_SALADIN = {47.5, -59.7},
-	LEADER_CLEOPATRA = {47, -60.7},
-	LEADER_VICTORIA = {31, -91.8},
-	LEADER_CATHERINE_DE_MEDICI = {35, -91.6},
-	LEADER_BARBAROSSA = {32.1, -84.6},
-	LEADER_GORGO = {41.8, -69},
-	LEADER_PERICLES = {41.8, -68.7},
-	LEADER_GANDHI = {45.4, -14},
-	LEADER_MVEMBA = {75.9, -77.1},
-	LEADER_HARDRADA = {21.2, -81.9},
-	LEADER_TRAJAN = {39.1, -76.7},
-	LEADER_PETER_GREAT = {24.7, -68.6},
-	LEADER_TOMYRIS = {36.8, -22.4},
-	LEADER_PHILIP_II = {39.2, -95.9},
-	LEADER_GILGAMESH = {44.6, -45.9},
-	LEADER_ALEXANDER = {38.3, -70.1},
-	LEADER_CYRUS = {46.4, -37.1},
-	LEADER_AMANITORE = {60.2, -54.5},
-	LEADER_JADWIGA = {32.6, -72.1},
-	--LEADER_MINOR_CIV_AMSTERDAM = {30.1, -84.3}, 
-	--LEADER_MINOR_CIV_BRUSSELS cannot be placed cos of proximity to england, germany
-	LEADER_MINOR_CIV_CARTHAGE = {43.6, -80.8},
-	LEADER_MINOR_CIV_GENEVA = {36.1, -85.2},
-	LEADER_MINOR_CIV_HATTUSA = {39.4, -59.5},
-	LEADER_MINOR_CIV_JERUSALEM = {46, -55.6},
-	LEADER_MINOR_CIV_KABUL = {42, -25.4},
-	LEADER_MINOR_CIV_KANDY = {64.1, -10.8},
-	LEADER_MINOR_CIV_KUMASI = {65.1, -92.6},
-	LEADER_MINOR_CIV_LISBON = {42.4, -98.1},
-	LEADER_MINOR_CIV_MOHENJO_DARO = {52.5, -17.8},
-	LEADER_MINOR_CIV_PRESLAV = {38.5, -65.4},
-	LEADER_MINOR_CIV_STOCKHOLM = {24.7, -76},
-	--LEADER_MINOR_CIV_VALLETTA = {42.2, -76.3},
-	--LEADER_MINOR_CIV_VILNIUS = {29.7, -70.3}, removed cos blocked freq. by europeans
-	--LEADER_MINOR_CIV_YEREVAN = {40.4, -48}, removed cos of proximity to Georgia
-	LEADER_MINOR_CIV_ZANZIBAR = {75.6, -52.5},
-	LEADER_MINOR_CIV_ANTANANARIVO = {85.6, -43.6},
-	LEADER_MINOR_CIV_ARMAGH = {30.4, -99.5},
-	--LEADER_MINOR_CIV_GRANADA = {41, -92.7},
-	LEADER_MINOR_CIV_MUSCAT = {52.7, -33.4},
-	--LEADER_MINOR_CIV_ANTIOCH = {43.8, -55.2}, cannot be placed due to proximity to Jerusalem
-	--LEADER_MINOR_CIV_BABYLON cannot be placed cos of proximity to persia
-	LEADER_POUNDMAKER = {30.4, 163},
-	LEADER_TAMAR = {36.8, -47.2},
-	LEADER_CHANDRAGUPTA = {48.2, -4.8},
-	LEADER_SEONDEOK = {40, 36.9},
-	LEADER_GENGHIS_KHAN = {33.8, 19},
-	LEADER_WILHELMINA = {30.1, -84.3}, 
-	LEADER_ROBERT_THE_BRUCE = {27.2, -96.3},
-	LEADER_SHAKA = {91.9, -59.25},
-};
 
 local g_iW, g_iH;
 local g_iFlags = {};
