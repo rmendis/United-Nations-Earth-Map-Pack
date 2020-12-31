@@ -46,7 +46,7 @@ function AssignTrueStartingPlots:__InitStartingData()
 							error("Lake block TSL for " .. leaderName .. " at index: " .. i); 
 						else	
 							if (pPlot:IsWater()) then
-								print("WARNING: Water placement for ", leaderName .. " at index: " .. i); 
+								print("WARNING: Water placement for", leaderName .. " at index: " .. i); 
 							end
 
 							-- o/w assign TSL
