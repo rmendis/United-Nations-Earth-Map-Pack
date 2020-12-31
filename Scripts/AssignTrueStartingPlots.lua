@@ -27,27 +27,46 @@ function AssignTrueStartingPlots:__InitStartingData()
 
 		if (pPlayerConfig ~= nil) then
 			local leaderName = pPlayerConfig:GetLeaderTypeName();
-			local v = self.tsls[leaderName];
+			
+			if (leaderName ~= nil) then
+				local v = self.tsls[leaderName];
 
-			if (v ~= nil) then
-				local i = self:__GetIndex(v[1], v[2]);
-				local pPlot = Map.GetPlotByIndex(i);
+				if (leaderName ~= "LEADER_FREE_CITIES") then	-- ignore free cities "civ"
+					assert((v ~= nil), "No TSL for " .. leaderName);
 
-				if (pPlayer == Game.GetLocalPlayer() and (pPlot:IsLake() or pPlot:IsMountain())) then
-					error("Can't place TSL for local player", 2);	-- must throw exception
-				else
-					if (pPlot:IsMountain()) then
-						error("Mountain block TSL for " .. leaderName .. " at index: " .. i); 
-					elseif (pPlot:IsLake()) then
-						error("Lake block TSL for " .. leaderName .. " at index: " .. i); 
-					else	-- o/w assign TSL
-						pPlayer:SetStartingPlot(pPlot);
+					local i = self:__GetIndex(v[1], v[2]);
+					local pPlot = Map.GetPlotByIndex(i);
+
+					if (pPlayer == Game.GetLocalPlayer() and (pPlot:IsLake() or pPlot:IsMountain())) then
+						error("Can't place TSL for local player", 2);	-- must throw exception
+					else
+						if (pPlot:IsMountain()) then
+							error("Mountain block TSL for " .. leaderName .. " at index: " .. i); 
+						elseif (pPlot:IsLake()) then
+							error("Lake block TSL for " .. leaderName .. " at index: " .. i); 
+						else	
+							if (pPlot:IsWater()) then
+								print("WARNING: Water placement for ", leaderName .. " at index: " .. i); 
+							end
+
+							-- o/w assign TSL
+							pPlayer:SetStartingPlot(pPlot);
 					
-						print("Assigning TSL for ", leaderName .. " at index: " .. i); 
+							print("Assigning TSL for", leaderName .. " at index: " .. i); 
+						end
 					end
 				end
 			end
 		end
+
+		--[[
+		local pPlot = pPlayer:GetStartingPlot();
+		if (pPlot ~= nil) then
+			print("DEBUG: starting plot index: " .. pPlot:GetIndex());
+		else
+			--print("DEBUG: no starting plot assigned for " .. pPlayerConfig:GetLeaderTypeName());
+		end
+		--]]
 	end 
 end
 ------------------------------------------------------------------------------
