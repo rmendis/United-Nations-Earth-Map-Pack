@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SetupParameters -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 1/2/2021 7:51:05 PM -->
+<GameInfo>
+	<!-- Restrict City States from custom external supported table MapCityStates -->
+	<DomainValueFilterQueries>
+		<Row QueryId="MapCityStates" />
+	</DomainValueFilterQueries>
+
+	<Queries>
+		<Row QueryId="MapCityStates" SQL="SELECT Domain, CivilizationType as Value, 'intersect' as Filter FROM MapCityStates WHERE Map = ?1" />
+	</Queries>
+
+	<QueryParameters>
+		<Row QueryId="MapCityStates" Index="1" ConfigurationGroup="Map" ConfigurationId="MAP_SCRIPT" />
+	</QueryParameters>
+</GameInfo>

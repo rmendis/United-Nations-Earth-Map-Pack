@@ -86,6 +86,7 @@ local g_TSLs = {
 	LEADER_WILHELMINA = {30.1, -84.3}, 
 	LEADER_ROBERT_THE_BRUCE = {27.2, -96.3},
 	LEADER_SHAKA = {91.9, -59.25},
+	LEADER_HAMMURABI = {43.9, -43.2},
 
 	-- cvs & tcs city states
 	CVS_LEADER_MINOR_CIV_IQUALUIT = {20.6, -157.2},
