@@ -75,7 +75,7 @@ function AssignTrueStartingPlots:__TryToSetPlayerStartingPlot(pPlayer, leaderNam
 		print("NOTE: Lake block TSL for " .. leaderName .. " at index: " .. i ..". Trying adjacent plot");
 	-- hard code for Kupe
 	elseif (pPlot:IsWater() and leaderName ~= "LEADER_KUPE") then
-		print("Note: Water tile block for ", leaderName .. " at index: " .. i ..". Trying adjacent plot"); 
+		print("NOTE: Water tile block for ", leaderName .. " at index: " .. i ..". Trying adjacent plot"); 
 	elseif (pPlot:IsImpassable()) then
 		print("NOTE: Impassible tile blocks TSL for " .. leaderName .. " at index: " .. i ..". Trying adjacent plot");
 
