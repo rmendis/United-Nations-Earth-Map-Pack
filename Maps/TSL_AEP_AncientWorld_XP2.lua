@@ -109,8 +109,9 @@ local g_TSLs = {
 	--LEADER_MINOR_CIV_AKKAD	--blocked by Babylon and Sumeria
 	LEADER_MINOR_CIV_BOLOGNA = {36.5, -80.5},
 	--LEADER_MINOR_CIV_CARDIFF = {30.1, -93.81},	-- blocked by England
-	LEADER_MINOR_CIV_FEZ = {44.3, -96.5},
+	LEADER_MINOR_CIV_FEZ = {45.3, -96.5},
 	LEADER_MINOR_CIV_NGAZARGAMU = {59.4, -77.4},
+	LEADER_MINOR_CIV_LISBON = {68.6, -46.8},		-- Mogadishu
 };
 
 local g_iW, g_iH;

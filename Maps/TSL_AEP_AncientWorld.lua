@@ -97,6 +97,7 @@ local g_TSLs = {
 	LEADER_LADY_TRIEU = {51.2, 17},
 	LEADER_KUBLAI_KHAN_CHINA = {36.4, 31.5},
 	LEADER_KUBLAI_KHAN_MONGOLIA = {36.4, 31.5},
+	LEADER_MINOR_CIV_LISBON = {68.6, -46.8},		-- Mogadishu
 };
 
 local g_iW, g_iH;
