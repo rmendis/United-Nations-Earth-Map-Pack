@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TSLAncientWorldGS_RemoveData -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 4/28/2021 4:37:33 PM -->
+<GameInfo>
+	<Types>
+		<!-- City States -->
+		<Delete Type="CIVILIZATION_AKKAD"/>
+		<Delete Type="CIVILIZATION_AMSTERDAM"/>
+		<Delete Type="CIVILIZATION_ANTIOCH"/>
+		<Delete Type="CIVILIZATION_AUCKLAND"/>
+		<Delete Type="CIVILIZATION_BABYLON"/>
+		<Delete Type="CIVILIZATION_BRUSSELS"/>
+		<Delete Type="CIVILIZATION_BUENOS_AIRES"/>
+		<Delete Type="CIVILIZATION_CAGUANA"/>
+		<Delete Type="CIVILIZATION_CAHOKIA"/>
+		<Delete Type="CIVILIZATION_CARDIFF"/>
+		<Delete Type="CIVILIZATION_JERUSALEM"/>
+		<Delete Type="CIVILIZATION_GRANADA"/>
+		<Delete Type="CIVILIZATION_HUNZA"/>
+		<Delete Type="CIVILIZATION_LA_VENTA"/>
+		<Delete Type="CIVILIZATION_MEXICO_CITY"/>
+		<Delete Type="CIVILIZATION_NALANDA"/>
+		<Delete Type="CIVILIZATION_NAZCA"/>
+		<Delete Type="CIVILIZATION_NAN_MADOL"/>
+		<Delete Type="CIVILIZATION_PALENQUE"/>
+		<Delete Type="CIVILIZATION_PRESLAV"/>
+		<Delete Type="CIVILIZATION_RAPA_NUI"/>
+		<Delete Type="CIVILIZATION_TORONTO"/>
+		<Delete Type="CIVILIZATION_VALLETTA"/>
+		<Delete Type="CIVILIZATION_VATICAN_CITY"/>
+		<Delete Type="CIVILIZATION_VILNIUS"/>
+		<Delete Type="CIVILIZATION_YEREVAN"/>
+	</Types>
+</GameInfo>
