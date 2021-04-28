@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TSLOceaniaGS_RemoveData -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 4/28/2021 11:14:00 AM -->
+<GameInfo>
+	<Types>
+		<!-- City States -->
+		<Delete Type="CIVILIZATION_AKKAD"/>
+		<Delete Type="CIVILIZATION_ANTANANARIVO"/>
+		<Delete Type="CIVILIZATION_ANTIOCH"/>
+		<Delete Type="CIVILIZATION_ARMAGH"/>
+		<Delete Type="CIVILIZATION_AUCKLAND"/>
+		<Delete Type="CIVILIZATION_AYUTTHAYA"/>
+		<Delete Type="CIVILIZATION_BABYLON"/>
+		<Delete Type="CIVILIZATION_BOLOGNA"/>
+		<Delete Type="CIVILIZATION_BRUSSELS"/>
+		<Delete Type="CIVILIZATION_BUENOS_AIRES"/>
+		<Delete Type="CIVILIZATION_CAGUANA"/>
+		<Delete Type="CIVILIZATION_CAHOKIA"/>
+		<Delete Type="CIVILIZATION_CARDIFF"/>
+		<Delete Type="CIVILIZATION_CHINGUETTI"/>
+		<Delete Type="CIVILIZATION_FEZ"/>
+		<Delete Type="CIVILIZATION_GENEVA"/>
+		<Delete Type="CIVILIZATION_GRANADA"/>
+		<Delete Type="CIVILIZATION_HATTUSA"/>
+		<Delete Type="CIVILIZATION_HONG_KONG"/>
+		<Delete Type="CIVILIZATION_HUNZA"/>
+		<Delete Type="CIVILIZATION_JAKARTA"/>
+		<Delete Type="CIVILIZATION_JERUSALEM"/>
+		<Delete Type="CIVILIZATION_JOHANNESBURG"/>
+		<Delete Type="CIVILIZATION_KABUL"/>
+		<Delete Type="CIVILIZATION_KANDY"/>
+		<Delete Type="CIVILIZATION_KUMASI"/>
+		<Delete Type="CIVILIZATION_LAHORE"/>
+		<Delete Type="CIVILIZATION_LA_VENTA"/>
+		<Delete Type="CIVILIZATION_LISBON"/>
+		<Delete Type="CIVILIZATION_MEXICO_CITY"/>
+		<Delete Type="CIVILIZATION_MOHENJO_DARO"/>
+		<Delete Type="CIVILIZATION_MUSCAT"/>
+		<Delete Type="CIVILIZATION_NALANDA"/>
+		<Delete Type="CIVILIZATION_NAZCA"/>
+		<Delete Type="CIVILIZATION_NGAZARGAMU"/>
+		<Delete Type="CIVILIZATION_PALENQUE"/>
+		<Delete Type="CIVILIZATION_PRESLAV"/>
+		<Delete Type="CIVILIZATION_RAPA_NUI"/>
+		<Delete Type="CIVILIZATION_SAMARKAND"/>
+		<Delete Type="CIVILIZATION_SINGAPORE"/>
+		<Delete Type="CIVILIZATION_TARUGA"/>
+		<Delete Type="CIVILIZATION_VALLETTA"/>
+		<Delete Type="CIVILIZATION_VATICAN_CITY"/>
+		<Delete Type="CIVILIZATION_VILNIUS"/>
+		<Delete Type="CIVILIZATION_WOLIN"/>
+		<Delete Type="CIVILIZATION_YEREVAN"/>
+		<Delete Type="CIVILIZATION_ZANZIBAR"/>
+	</Types>
+</GameInfo>
