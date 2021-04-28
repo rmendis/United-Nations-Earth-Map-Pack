@@ -51,7 +51,7 @@
 			<Text>True Start Location New World (AEP)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_NEW_WORLD_DESCRIPTION">
-			<Text>An internally randomized map of The New World based on the AEP of Earth with true starts. (109x97)[NEWLINE][ICON_Exclamation] [COLOR_RED]ADVANCED USERS ONLY[ENDCOLOR]</Text>
+			<Text>An internally randomized map of The New World based on the AEP of Earth with true starts. (109x97)[NEWLINE]</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_ANCIENT_WORLD_NAME">
 			<Text>True Start Location The Ancient World (AEP)</Text>
