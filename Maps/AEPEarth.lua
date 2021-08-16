@@ -1345,15 +1345,15 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 
 			-- Australia, Sahara & Arabia
 			elseif ((iDistanceFromCenter > g_iE and lat > 0.11 and lat < 0.48 and iAzimuth > 22 and iAzimuth < 64)
-					or (iDistanceFromCenter > 44 and iDistanceFromCenter < 66 and iAzimuth > -109 and iAzimuth < -31)) then
+					or (lat < 0.41 and iDistanceFromCenter < 63 and iAzimuth > -109 and iAzimuth < -31)) then
 				-- desert
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(97);
 				
-				iPlainsTop = earth:GetHeight(97);
+				iPlainsTop = iGrassBottom;
 				iPlainsBottom = earth:GetHeight(90);
 
-				iDesertTop = earth:GetHeight(90);
+				iDesertTop = iPlainsBottom;
 				iDesertBottom = earth:GetHeight(0);
 
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
@@ -1380,7 +1380,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(30);
 																		
-				iPlainsTop = earth:GetHeight(30);
+				iPlainsTop = iGrassBottom;
 				iPlainsBottom = earth:GetHeight(10);
 
 				iDesertTop = iPlainsBottom;
