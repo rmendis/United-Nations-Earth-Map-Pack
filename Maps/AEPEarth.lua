@@ -1327,8 +1327,9 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
 				end
 
-			-- arctic circle
-			elseif (lat > 0.73) then
+			-- arctic circle and patagonia
+			elseif (lat > 0.73 
+					or (lat > 0.66 and iDistanceFromCenter > g_iE and iAzimuth > 245 and iAzimuth < 270)) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
@@ -1373,6 +1374,27 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 						terrainTypes[index] = g_TERRAIN_TYPE_GRASS;
 					end
 				end
+
+			-- grassland not found further north than 60 deg.
+			elseif (lat > 0.66) then
+				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
+					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
+
+					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
+					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS_MOUNTAIN;
+					end
+
+				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
+					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
+				
+					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA;
+					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS;
+					end
+				end
 			
 			-- tropics
 			elseif (lat < 0.26) then
@@ -1399,27 +1421,6 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 		
 					if ((earthVal >= iGrassBottom) and (earthVal <= iGrassTop)) then
 						terrainTypes[index] = g_TERRAIN_TYPE_GRASS;
-					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS;
-					end
-				end
-
-			-- grassland not found further north than 60 deg.
-			elseif (lat > 0.66) then
-				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
-					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
-
-					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
-					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS_MOUNTAIN;
-					end
-
-				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
-					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
-				
-					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA;
 					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
 						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS;
 					end
