@@ -16,7 +16,6 @@ VALUES
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_NEW_WORLD_NAME', 'LOC_MAP_AEP_NEW_WORLD_DESCRIPTION', NULL, 0, 0),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_ANCIENT_WORLD_NAME', 'LOC_MAP_AEP_ANCIENT_WORLD_DESCRIPTION', NULL, 0, 0),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_EARTH_BOTTOM_NAME', 'LOC_MAP_AEP_EARTH_BOTTOM_DESCRIPTION', NULL, 0, 0),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_EARTH_TOP_NAME', 'LOC_MAP_AEP_EARTH_TOP_DESCRIPTION', NULL, 0, 0),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_XP2.lua', 'Maps:Expansion2Maps', 'LOC_MAP_AEP_EARTH_NAME', 'LOC_MAP_AEP_EARTH_DESCRIPTION', NULL, 0, 0),
 
 	/* TSL standard maps */
@@ -73,7 +72,6 @@ VALUES
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
-	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/TSL_AEP_Oceania_XP2.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/TSL_AEP_NewWorld.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
@@ -91,7 +89,6 @@ VALUES
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
-	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/TSL_AEP_NewWorld.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/TSL_AEP_Oceania_XP2.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
