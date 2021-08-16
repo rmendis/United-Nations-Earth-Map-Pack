@@ -1294,6 +1294,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
 
+			local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+
 			local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);
 			local iAzimuth = Azimuth(iX, iY, g_CenterX, g_CenterY);
 
@@ -1314,15 +1316,16 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 
 			local earthVal = earth:GetHeight(iX, iY);
 
-			-- north pole
-			if (iDistanceFromCenter < 15 or iDistanceFromCenter > 115) then
+			-- north pole and antarctica
+			if (lat > 0.83 or iDistanceFromCenter > 115) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
 				end
 
-			elseif (iDistanceFromCenter < 20 or iDistanceFromCenter > 110) then
+			-- arctic circle
+			elseif (lat > 0.73) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
@@ -1368,8 +1371,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					end
 				end
 
-			-- arctic circle
-			elseif (iDistanceFromCenter < 25 or iDistanceFromCenter > 105) then
+			-- grassland not found further north than 60 deg.
+			elseif (lat > 0.66) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
