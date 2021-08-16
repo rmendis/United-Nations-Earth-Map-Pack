@@ -1329,7 +1329,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 
 			-- arctic circle and patagonia
 			elseif (lat > 0.73 
-					or (lat > 0.66 and iDistanceFromCenter > g_iE and iAzimuth > 245 and iAzimuth < 270)) then
+					or (lat > 0.5 and iDistanceFromCenter > g_iE and iAzimuth > - 115 and iAzimuth < -90)) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
@@ -1528,17 +1528,14 @@ function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
 end
 
 -- override: for a radial equator 
+------------------------------------------------------------------------------
 function FeatureGenerator:AddJunglesAtPlot(plot, iX, iY)
-	--Jungle Check. First see if it can place the feature.
+	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+
+	--Jungle Check. First see if it can place the feature.	
 	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_JUNGLE)) then
 		if(math.ceil(self.iJungleCount * 100 / self.iNumLandPlots) <= self.iJungleMaxPercent) then
-			local iEquator = 72;		-- approx. measurement from sat. img
-			local iJungleBottom = iEquator -  math.ceil(self.iJungleMaxPercent * 0.5);
-			local iJungleTop = iEquator +  math.ceil(self.iJungleMaxPercent * 0.5);
-
-			local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
-
-			if(iDistanceFromCenter >= iJungleBottom  and iDistanceFromCenter <= iJungleTop) then 
+			if(lat < 0.26) then		-- tropics 
 				--Weight based on adjacent plots if it has more than 3 start subtracting
 				local iScore = 300;
 				local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_JUNGLE);
@@ -1574,6 +1571,7 @@ function FeatureGenerator:AddJunglesAtPlot(plot, iX, iY)
 
 	return false
 end
+
 ------------------------------------------------------------------------------
 function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
 	--Reef Check. First see if it can place the feature.
