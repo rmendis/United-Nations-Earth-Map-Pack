@@ -1421,7 +1421,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				end
 
 			-- central eurasia and north america
-			elseif (iDistanceFromCenter < 35 or iDistanceFromCenter > 90) then
+			elseif (lat > 0.44) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_GRASS_MOUNTAIN;
 
