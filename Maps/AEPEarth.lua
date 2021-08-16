@@ -18,9 +18,13 @@ include "AssignStartingPlots"
 
 include "AssignTrueStartingPlots"
 
+local earth = nil;
+
 -- north pole
 local g_CenterX = 110;
 local g_CenterY = 94;
+
+local g_iE = 68;		-- approx. distance to equator from north pole (Ref: iEquator)
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
@@ -1084,7 +1088,7 @@ function GenerateMap()
 	local nwGen = NaturalWonderGenerator.Create(args);
 
 	AreaBuilder.Recalculate();
-	TerrainBuilder.AnalyzeChokepoints();
+	--TerrainBuilder.AnalyzeChokepoints();
 	TerrainBuilder.StampContinents();
 	
 	resourcesConfig = MapConfiguration.GetValue("resources");
@@ -1494,16 +1498,15 @@ end
 
 -- override: circular poles
 function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
-	local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
-	local iV = TerrainBuilder.GetRandomNumber(8, "Random variance");
+	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
 	
-	if (iDistanceFromCenter + iV < 26 or iDistanceFromCenter + iV > 113) then
+	if (lat > 0.65) then
 		local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
 
-		iScore = iScore + math.abs(((68 - iDistanceFromCenter)/68)) * 100;		-- 68 is approx. half max. dist. from center
+		iScore = iScore + lat * 100;
 
 		if(IsAdjacentToLandPlot(iX,iY) == true) then
-			iScore = iScore / 1.42;
+			iScore = iScore / 2.0;
 		end
 
 		local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_ICE);
@@ -1511,11 +1514,8 @@ function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
 
 		if(iScore > 130) then
 			TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
-			return true;
 		end
 	end
-
-	return false;
 end
 
 -- override: for a radial equator 
@@ -1607,4 +1607,22 @@ end
 -- the angle of (iX1, iY1) relative to (iX0, iY0) in degrees
 function Azimuth(iX1, iY1, iX0, iY0)
 	return math.deg(math.atan2(iY1-iY0, iX1-iX0));
+end
+
+-------------------------------------------------------------------------------------------
+-- LATITUDE LOOKUP
+----------------------------------------------------------------------------------
+function GetRadialLatitudeAtPlot(variationFrac, iX, iY)
+	local iZ = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial distance from center
+
+	-- Terrain bands are governed by latitude.
+	-- Returns a latitude value between 0.0 (tropical) and 1.0 (polar).
+	local lat = math.abs((g_iE - iZ)/g_iE);
+	
+	-- Adjust latitude using variation fractal, to roughen the border between bands:
+	lat = lat + (128 - variationFrac:GetHeight(iX, iY))/(255.0 * 5.0);
+	-- Limit to the range [0, 1]:
+	lat = math.clamp(lat, 0, 1);
+	
+	return lat;
 end
