@@ -24,7 +24,7 @@ local earth = nil;
 local g_CenterX = 110;
 local g_CenterY = 94;
 
-local g_iE = 68;		-- approx. distance to equator from north pole (Ref: iEquator)
+local g_iE = 72;		-- approx. distance to equator from north pole (measured from image of map)
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
