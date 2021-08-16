@@ -24,7 +24,7 @@ local earth = nil;
 local g_CenterX = 110;
 local g_CenterY = 94;
 
-local g_iE = 72;		-- approx. distance to equator from north pole (measured from image of map)
+local g_iE = 71.7;		-- approx. distance to equator from north pole (measured from image of map)
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
@@ -1370,30 +1370,9 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 						terrainTypes[index] = g_TERRAIN_TYPE_GRASS;
 					end
 				end
-
-			-- grassland not found further north than 60 deg.
-			elseif (lat > 0.66) then
-				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
-					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
-
-					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
-					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS_MOUNTAIN;
-					end
-
-				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
-					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
-				
-					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA;
-					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS;
-					end
-				end
 			
-			-- southeast asia & central america
-			elseif (iDistanceFromCenter > 48 or iDistanceFromCenter < 80) then
+			-- tropics
+			elseif (lat < 0.26) then
 				-- rainforest
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(30);
@@ -1415,6 +1394,27 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 		
 					if ((earthVal >= iGrassBottom) and (earthVal <= iGrassTop)) then
 						terrainTypes[index] = g_TERRAIN_TYPE_GRASS;
+					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS;
+					end
+				end
+
+			-- grassland not found further north than 60 deg.
+			elseif (lat > 0.66) then
+				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
+					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
+
+					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
+					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS_MOUNTAIN;
+					end
+
+				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
+					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
+				
+					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA;
 					elseif ((earthVal >= iPlainsBottom) and (earthVal <= iPlainsTop)) then
 						terrainTypes[index] = g_TERRAIN_TYPE_PLAINS;
 					end
