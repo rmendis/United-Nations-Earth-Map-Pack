@@ -6,7 +6,6 @@ INSERT INTO Maps (File, Domain, Name, Description, Image, RequiresUniqueLeaders,
 VALUES 
 	/* standard maps */
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth.lua', 'StandardMaps', 'LOC_MAP_AEP_EARTH_NAME', 'LOC_MAP_AEP_EARTH_DESCRIPTION', NULL, 0, 0),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'StandardMaps', 'LOC_MAP_AEP_EARTH_TOP_NAME', 'LOC_MAP_AEP_EARTH_TOP_DESCRIPTION', NULL, 0, 0),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'StandardMaps', 'LOC_MAP_AEP_EARTH_BOTTOM_NAME', 'LOC_MAP_AEP_EARTH_BOTTOM_DESCRIPTION', NULL, 0, 0),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'StandardMaps', 'LOC_MAP_AEP_NEW_WORLD_NAME', 'LOC_MAP_AEP_NEW_WORLD_DESCRIPTION', NULL, 0, 0),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_Oceania.lua', 'StandardMaps', 'LOC_MAP_AEP_OCEANIA_NAME', 'LOC_MAP_AEP_OCEANIA_DESCRIPTION', NULL, 0, 0),
@@ -51,7 +50,6 @@ VALUES
 	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'difference'),
 	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld.lua', 'difference'),
 	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'difference'),
-	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'difference'),
 	('Maps:Expansion2Maps', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth.lua', 'difference'),
 
 	/* TSL maps */
@@ -67,7 +65,6 @@ VALUES
 
 	-- rainfall
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
-	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld.lua', 'Rainfall', 'LOC_MAP_RAINFALL_NAME', 'LOC_MAP_RAINFALL_DESCRIPTION', 'Rainfall', 2, 'Map', 'rainfall', 'MapOptions', 250),
@@ -86,7 +83,6 @@ VALUES
 
 	-- world age
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
-	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_NewWorld.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
 	('Map', '{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEP_AncientWorld.lua', 'WorldAge', 'LOC_MAP_WORLD_AGE_NAME', 'LOC_MAP_WORLD_AGE_DESCRIPTION', 'WorldAge', 2, 'Map', 'world_age', 'MapOptions', 230),
@@ -106,19 +102,6 @@ VALUES
 INSERT INTO MapLeaders (Map, LeaderType)
 VALUES
 /*
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'RANDOM'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'RANDOM_POOL1'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'RANDOM_POOL2'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_GITARJA'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_MONTEZUMA'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_HOJO'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_QIN'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_JAYAVARMAN'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_JOHN_CURTIN'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_POUNDMAKER'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_SEONDEOK'),
-	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Top.lua', 'LEADER_GENGHIS_KHAN'),
-
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'RANDOM'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'RANDOM_POOL1'),
 	('{0D260DE6-56DC-4704-9486-1E532E1432BD}Maps/AEPEarth_Bottom.lua', 'RANDOM_POOL2'),
