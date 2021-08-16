@@ -1088,7 +1088,7 @@ function GenerateMap()
 	local nwGen = NaturalWonderGenerator.Create(args);
 
 	AreaBuilder.Recalculate();
-	--TerrainBuilder.AnalyzeChokepoints();
+	--TerrainBuilder.AnalyzeChokepoints();   -- WorldBuilder Only: re-enable if super size maps get supported
 	TerrainBuilder.StampContinents();
 	
 	resourcesConfig = MapConfiguration.GetValue("resources");
@@ -1382,6 +1382,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 																		
 				iPlainsTop = earth:GetHeight(30);
 				iPlainsBottom = earth:GetHeight(10);
+
+				iDesertTop = iPlainsBottom;
 
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_DESERT_MOUNTAIN;
