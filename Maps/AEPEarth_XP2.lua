@@ -1302,6 +1302,24 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 		plotTypes = RemoveCoastalMountains(plotTypes, terrainTypes);
 	end
 
+	-- 12% snow
+	local iSnowTop = earth:GetHeight(100);	
+	local iSnowBottom = earth:GetHeight(88);
+				
+	-- 10% tundra							
+	local iTundraTop = iSnowBottom;										
+	local iTundraBottom = earth:GetHeight(78);
+
+	local iPlainsTop = iTundraBottom;
+	local iPlainsBottom = earth:GetHeight(53);
+
+	local iGrassTop = iPlainsBottom;
+	local iGrassBottom = earth:GetHeight(33);
+
+	-- 33% desert
+	local iDesertTop = iGrassBottom;
+	local iDesertBottom = earth:GetHeight(0);
+
 	for iX = 0, iW - 1 do
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
@@ -1309,24 +1327,9 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 			local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);
 			local iAzimuth = Azimuth(iX, iY, g_CenterX, g_CenterY);
 
-			local iSnowTop = earth:GetHeight(100);	
-			local iSnowBottom = earth:GetHeight(75);
-											
-			local iTundraTop = earth:GetHeight(75);										
-			local iTundraBottom = earth:GetHeight(50);
-
-			local iPlainsTop = earth:GetHeight(50);
-			local iPlainsBottom = earth:GetHeight(15);
-
-			local iDesertTop = earth:GetHeight(15);
-			local iDesertBottom = earth:GetHeight(3);
-
-			local iGrassTop = earth:GetHeight(3);
-			local iGrassBottom = earth:GetHeight(0);
-
 			local earthVal = earth:GetHeight(iX, iY);
 
-			-- north pole
+			-- north pole and antarctica
 			if (iDistanceFromCenter < 15 or iDistanceFromCenter > 115) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
@@ -1334,6 +1337,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
 				end
 
+			-- arctic circle and patagonia
 			elseif (iDistanceFromCenter < 20 or iDistanceFromCenter > 110) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
@@ -1356,10 +1360,10 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(97);
 				
-				iPlainsTop = earth:GetHeight(97);
+				iPlainsTop = iGrassBottom;
 				iPlainsBottom = earth:GetHeight(90);
 
-				iDesertTop = earth:GetHeight(90);
+				iDesertTop = iPlainsBottom;
 				iDesertBottom = earth:GetHeight(0);
 
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
@@ -1380,7 +1384,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					end
 				end
 
-			-- arctic circle
+			-- grassland not found further north than 60 deg.
 			elseif (iDistanceFromCenter < 25 or iDistanceFromCenter > 105) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
@@ -1401,14 +1405,16 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					end
 				end
 			
-			-- southeast asia & central america
+			-- tropics
 			elseif (iDistanceFromCenter > 48 or iDistanceFromCenter < 80) then
 				-- rainforest
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(30);
 																		
-				iPlainsTop = earth:GetHeight(30);
+				iPlainsTop = iGrassBottom;
 				iPlainsBottom = earth:GetHeight(10);
+
+				iDesertTop = iPlainsBottom;
 
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_DESERT_MOUNTAIN;
