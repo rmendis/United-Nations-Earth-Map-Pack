@@ -1525,6 +1525,8 @@ function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
 			TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
 		end
 	end
+
+	return false;
 end
 
 -- override: for a radial equator 
@@ -1574,15 +1576,14 @@ end
 
 ------------------------------------------------------------------------------
 function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
+	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+
 	--Reef Check. First see if it can place the feature.
-	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_REEF)) then
+	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_REEF) and lat < 0.38) then		-- northern most reefs
 		self.iNumReefablePlots = self.iNumReefablePlots + 1;
 		if(math.ceil(self.iReefCount * 100 / self.iNumReefablePlots) <= self.iReefMaxPercent) then
-				local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
-
 				--Weight based on adjacent plots
-				local iEquator = 72;		-- approx. measurement from sat. img
-				local iScore  = 3 * math.abs(72 - iDistanceFromCenter);
+				local iScore  = 3 * g_iE * lat;
 				local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_REEF);
 
 				if(iAdjacent == 0 ) then
