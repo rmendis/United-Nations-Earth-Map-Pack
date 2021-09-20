@@ -1091,7 +1091,7 @@ function GenerateMap()
 	--TerrainBuilder.AnalyzeChokepoints();   -- WorldBuilder Only: re-enable if super size maps get supported
 	TerrainBuilder.StampContinents();
 	
-	resourcesConfig = MapConfiguration.GetValue("resources");
+	local resourcesConfig = MapConfiguration.GetValue("resources");
 	local args = {
 		resources = resourcesConfig,
 		LuxuriesPerRegion = 7,
@@ -1314,13 +1314,12 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 
 			local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
 
-			local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);
 			local iAzimuth = Azimuth(iX, iY, g_CenterX, g_CenterY);
 
 			local earthVal = earth:GetHeight(iX, iY);
 
 			-- north pole and antarctica
-			if (lat > 0.83 or iDistanceFromCenter > 115) then
+			if (lat > 0.83) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
@@ -1328,8 +1327,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				end
 
 			-- arctic circle and patagonia
-			elseif (lat > 0.73 
-					or (lat > 0.5 and iDistanceFromCenter > g_iE and iAzimuth > - 115 and iAzimuth < -90)) then
+			elseif (lat > 0.73) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
@@ -1345,8 +1343,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				end
 
 			-- Australia, Sahara & Arabia
-			elseif ((iDistanceFromCenter > g_iE and lat > 0.11 and lat < 0.48 and iAzimuth > 22 and iAzimuth < 64)
-					or (lat < 0.41 and iDistanceFromCenter < 63 and iAzimuth > -109 and iAzimuth < -31)) then
+			elseif ((lat > 0.11 and lat < 0.48 and iAzimuth > 22 and iAzimuth < 64)
+					or (lat < 0.41 and lat < 0.13 and iAzimuth > -109 and iAzimuth < -31)) then
 				-- desert
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(97);
@@ -1614,21 +1612,33 @@ end
 
 -- the angle of (iX1, iY1) relative to (iX0, iY0) in degrees
 function Azimuth(iX1, iY1, iX0, iY0)
-	return math.deg(math.atan2(iY1-iY0, iX1-iX0));
+	return math.deg(_Azimuth(iX1, iY1, iX0, iY0));
+end
+
+-- the angle of (iX1, iY1) relative to (iX0, iY0)
+function _Azimuth(iX1, iY1, iX0, iY0)
+	return math.atan2(iY1-iY0, iX1-iX0);
 end
 
 -------------------------------------------------------------------------------------------
 -- LATITUDE LOOKUP
 ----------------------------------------------------------------------------------
 function GetRadialLatitudeAtPlot(variationFrac, iX, iY)
-	local iZ = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial distance from center
+	local iTheta = _Azimuth(iX, iY, g_CenterX, g_CenterY); -- azimuth rel. to center
+
+	-- (imaginary) coordinates of point on equator closest to plot
+	local i_Eq_X = g_iE * math.cos(iTheta);
+	local i_Eq_Y = g_iE * math.sin(iTheta);
+
+	local iZ = Map.GetPlotDistance(iX, iY, i_Eq_X, i_Eq_Y);	-- radial distance from equator
 
 	-- Terrain bands are governed by latitude.
 	-- Returns a latitude value between 0.0 (tropical) and 1.0 (polar).
-	local lat = math.abs((g_iE - iZ)/g_iE);
+	local lat = 1 - (g_iE - iZ)/g_iE;
 	
 	-- Adjust latitude using variation fractal, to roughen the border between bands:
 	lat = lat + (128 - variationFrac:GetHeight(iX, iY))/(255.0 * 5.0);
+
 	-- Limit to the range [0, 1]:
 	lat = math.clamp(lat, 0, 1);
 	
