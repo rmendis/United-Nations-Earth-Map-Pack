@@ -19,6 +19,8 @@ include "AssignStartingPlots"
 
 include "AssignTrueStartingPlots"
 
+local earth = nil;
+
 -- north pole
 local g_CenterX = 110;
 local g_CenterY = 94;
