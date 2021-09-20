@@ -1630,7 +1630,7 @@ function GetRadialLatitudeAtPlot(variationFrac, iX, iY)
 	local i_Eq_X = g_iE * math.cos(iTheta);
 	local i_Eq_Y = g_iE * math.sin(iTheta);
 
-	local iZ = Map.GetPlotDistance(iX, iY, i_Eq_X, i_Eq_Y);	-- radial distance from equator
+	local iZ = __GetPlotDistance(iX, iY, i_Eq_X, i_Eq_Y);	-- radial distance from equator
 
 	-- Terrain bands are governed by latitude.
 	-- Returns a latitude value between 0.0 (tropical) and 1.0 (polar).
