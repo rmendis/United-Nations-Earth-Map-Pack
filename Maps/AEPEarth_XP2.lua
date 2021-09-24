@@ -1414,7 +1414,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				iGrassBottom = earth:GetHeight(30);
 																		
 				iPlainsTop = iGrassBottom;
-				iPlainsBottom = earth:GetHeight(10);
+				iPlainsBottom = earth:GetHeight(5);
 
 				iDesertTop = iPlainsBottom;
 
