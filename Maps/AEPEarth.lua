@@ -1311,11 +1311,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 	for iX = 0, iW - 1 do
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
-
 			local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
-
 			local iAzimuth = Azimuth(iX, iY, g_CenterX, g_CenterY);
-
 			local earthVal = earth:GetHeight(iX, iY);
 
 			-- antarctica
