@@ -25,6 +25,8 @@ local earth = nil;
 local g_CenterX = 110;
 local g_CenterY = 94;
 
+local g_iE = 71.7;		-- approx. distance to equator from north pole (measured from image of map)
+
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
 	LEADER_GITARJA = {75, 21},
@@ -1689,17 +1691,18 @@ function FeatureGenerator:AddJunglesAtPlot(plot, iX, iY)
 
 	return false
 end
+
 ------------------------------------------------------------------------------
 function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
+	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+
 	--Reef Check. First see if it can place the feature.
-	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_REEF)) then
+	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_REEF) and lat < 0.38) then		-- northern most reefs
 		self.iNumReefablePlots = self.iNumReefablePlots + 1;
 		if(math.ceil(self.iReefCount * 100 / self.iNumReefablePlots) <= self.iReefMaxPercent) then
-				local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
 
 				--Weight based on adjacent plots
-				local iEquator = 72;		-- approx. measurement from sat. img
-				local iScore  = 3 * math.abs(72 - iDistanceFromCenter);
+				local iScore  = 3 * g_iE * lat;
 				local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_REEF);
 
 				if(iAdjacent == 0 ) then
@@ -1721,6 +1724,7 @@ function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
 		end
 	end
 end
+
 ------------------------------------------------------------------------------
 function AddFeaturesFromContinents()
 	print("Adding Features from Continents");
@@ -1735,5 +1739,35 @@ end
 
 -- the angle of (iX1, iY1) relative to (iX0, iY0) in degrees
 function Azimuth(iX1, iY1, iX0, iY0)
-	return math.deg(math.atan2(iY1-iY0, iX1-iX0));
+	return math.deg(_Azimuth(iX1, iY1, iX0, iY0));
+end
+
+-- the angle of (iX1, iY1) relative to (iX0, iY0)
+function _Azimuth(iX1, iY1, iX0, iY0)
+	return math.atan2(iY1-iY0, iX1-iX0);
+end
+
+----------------------------------------------------------------------------------
+-- LATITUDE LOOKUP
+----------------------------------------------------------------------------------
+function GetRadialLatitudeAtPlot(variationFrac, iX, iY)
+	local iZ = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);		-- radial distance from center
+
+	if (iZ < 2*g_iE) then
+		-- Terrain bands are governed by latitude (in rad).
+		local _lat = math.abs(1/2 - iZ/(2*g_iE));
+
+		-- Returns a latitude value between 0.0 (tropical) and 1.0 (polar).
+		local lat = 2 * _lat;
+	
+		-- Adjust latitude using variation fractal, to roughen the border between bands:
+		lat = lat + (128 - variationFrac:GetHeight(iX, iY))/(255.0 * 5.0);
+
+		-- Limit to the range [0, 1]:
+		lat = math.clamp(lat, 0, 1);
+	
+		return lat;
+	else
+		return 1
+	end
 end
