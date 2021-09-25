@@ -1502,13 +1502,13 @@ end
 
 -- override: circular poles
 function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
-	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+	local lat = math.abs(GetRadialLatitudeAtPlot(earth, iX, iY));
 	
 	-- more south polar ice
 	if (lat > 0.66 or lat < - 0.6) then
 		local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
 
-		iScore = iScore + (math.abs(lat) * 100);
+		iScore = iScore + lat * 100;
 
 		if(IsAdjacentToLandPlot(iX,iY) == true) then
 			iScore = iScore / 2.0;
@@ -1521,8 +1521,6 @@ function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
 			TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
 		end
 	end
-
-	return false;
 end
 
 -- override: for a radial equator 
