@@ -1632,7 +1632,8 @@ function GetRadialLatitudeAtPlot(variationFrac, iX, iY)
 		local lat = 2 * _lat;
 	
 		-- Adjust latitude using variation fractal, to roughen the border between bands:
-		lat = lat + (128 - variationFrac:GetHeight(iX, iY))/(255.0 * 5.0);
+		-- lessen the variation at south pole
+		lat = lat + (128 - variationFrac:GetHeight(iX, iY))/(255.0 * 5.0) * (1 - iZ/(2*g_iE));
 
 		-- Limit to the range [-1, 1]:
 		lat = math.clamp(lat, -1, 1);
