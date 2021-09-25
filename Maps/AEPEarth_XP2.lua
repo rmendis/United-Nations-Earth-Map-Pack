@@ -23,7 +23,7 @@ local earth = nil;
 
 -- north pole
 local g_CenterX = 110;
-local g_CenterY = 93;
+local g_CenterY = 94;
 
 local g_iE = 71.4;			-- approx. distance to equator from north pole (measured from image of map)
 
@@ -1270,7 +1270,7 @@ function AddFeatures()
 	-- Get Rainfall setting input by user.
 	local rainfall = MapConfiguration.GetValue("rainfall");
 	
-	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40}	-- no rainforest
+	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40, iIcePercent = 33}	-- no rainforest
 	featuregen = FeatureGenerator.Create(args);
 
 	featuregen:AddFeatures(true, true);  --second parameter is whether or not rivers start inland);
@@ -1545,18 +1545,22 @@ function FeatureGenerator:AddIceToMap()
 
 	print ("Permanent Ice Tiles: " .. tostring(iPermanentIceTiles));
 
-	local iPercentNeeded = 75;
+	local iPercentNeeded = 65;
 
 	-- poles
 	for x = 0, self.iGridW - 1, 1 do
 		for y = self.iGridH - 1, 0, -1 do
-			local i = y * self.iGridW + x;
+			local lat = GetRadialLatitudeAtPlot(earth, x, y);
 
-			local plot = Map.GetPlotByIndex(i);
-			if (plot ~= nil) then
-				if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_ICE) == true and IsAdjacentToLandPlot(x, y) == false) then
-					if (TerrainBuilder.GetRandomNumber(100, "Permanent Ice") <= iPercentNeeded) then
-						AddIceAtPlot(plot, x, y, -1); 
+			if (lat > 0.83 or lat < -0.66) then
+				local i = y * self.iGridW + x;
+
+				local plot = Map.GetPlotByIndex(i);
+				if (plot ~= nil) then
+					if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_ICE) == true and IsAdjacentToLandPlot(x, y) == false) then
+						if (TerrainBuilder.GetRandomNumber(100, "Permanent Ice") <= iPercentNeeded) then
+							AddIceAtPlot(plot, x, y, -1); 
+						end
 					end
 				end
 			end
@@ -1617,17 +1621,17 @@ function FeatureGenerator:AddIceToMap()
 end
 
 -- override: circular poles
-function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
-	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+function AddIceAtPlot(plot, iX, iY, iE)
+	local lat = math.abs(GetRadialLatitudeAtPlot(earth, iX, iY));
 	
 	-- more south polar ice
 	if (lat > 0.66 or lat < - 0.6) then
 		local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
 
-		iScore = iScore + (math.abs(lat) * 100);
+		iScore = iScore + lat * 100;
 
 		if(IsAdjacentToLandPlot(iX,iY) == true) then
-			iScore = iScore / 1.42;
+			iScore = iScore / 2.0;
 		end
 
 		local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_ICE);
@@ -1638,8 +1642,6 @@ function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
 			TerrainBuilder.AddIce(plot:GetIndex(), iE); 
 		end
 	end
-
-	return false;
 end
 
 -- override: for a radial equator 
