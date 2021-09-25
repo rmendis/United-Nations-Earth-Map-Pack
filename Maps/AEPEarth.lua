@@ -22,7 +22,7 @@ local earth = nil;
 
 -- north pole
 local g_CenterX = 110;
-local g_CenterY = 93;
+local g_CenterY = 94;
 
 local g_iE = 71.4;			-- approx. distance to equator from north pole (measured from image of map)
 
