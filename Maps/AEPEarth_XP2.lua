@@ -1270,7 +1270,7 @@ function AddFeatures()
 	-- Get Rainfall setting input by user.
 	local rainfall = MapConfiguration.GetValue("rainfall");
 	
-	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40, iIcePercent = 33}	-- no rainforest
+	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40, iIcePercent = 15}	-- no rainforest
 	featuregen = FeatureGenerator.Create(args);
 
 	featuregen:AddFeatures(true, true);  --second parameter is whether or not rivers start inland);
@@ -1545,14 +1545,14 @@ function FeatureGenerator:AddIceToMap()
 
 	print ("Permanent Ice Tiles: " .. tostring(iPermanentIceTiles));
 
-	local iPercentNeeded = 65;
+	local iPercentNeeded = 50;
 
 	-- poles
 	for x = 0, self.iGridW - 1, 1 do
 		for y = self.iGridH - 1, 0, -1 do
 			local lat = GetRadialLatitudeAtPlot(earth, x, y);
 
-			if (lat > 0.83 or lat < -0.66) then
+			if (lat > 0.83 or lat < -0.073) then
 				local i = y * self.iGridW + x;
 
 				local plot = Map.GetPlotByIndex(i);
