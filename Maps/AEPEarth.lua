@@ -1521,6 +1521,8 @@ function FeatureGenerator:AddIceAtPlot(plot, iX, iY)
 			TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
 		end
 	end
+	
+	return false;
 end
 
 -- override: for a radial equator 
