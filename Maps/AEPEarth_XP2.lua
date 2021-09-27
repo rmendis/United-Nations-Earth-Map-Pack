@@ -25,7 +25,7 @@ local earth = nil;
 local g_CenterX = 110;
 local g_CenterY = 94;
 
-local g_iE = 70.67;			-- approx. distance to equator from north pole (measured from image of map)
+local g_iE = 70.6;			-- approx. distance to equator from north pole (measured from image of map)
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
@@ -1333,7 +1333,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 			local earthVal = earth:GetHeight(iX, iY);
 
 			-- antarctica
-			if (_lat < -0.83) then
+			if (_lat < -0.8) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
