@@ -1327,16 +1327,16 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 			-- arctic circle and patagonia
 			elseif (lat > 0.73) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
-					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
+					terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
 
-					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
+					if ((earthVal >= iSnowBottom) and (earthVal <= iSnowTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 					end
 				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
-					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
+					terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA;
 
-					if ((earthVal >= iTundraBottom) and (earthVal <= iTundraTop)) then
-						terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA;
+					if ((earthVal >= iSnowBottom) and (earthVal <= iSnowTop)) then
+						terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
 					end
 				end
 
