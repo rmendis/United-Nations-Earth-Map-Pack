@@ -1332,8 +1332,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 			local iDesertTop = iGrassBottom;
 			local iDesertBottom = earth:GetHeight(0);
 
-			-- antarctica
-			if (_lat < -0.7) then
+			-- antarctica and north pole
+			if (_lat < -0.7 or _lat > 0.83) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
@@ -1341,7 +1341,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				end
 
 			-- arctic circle and patagonia
-			elseif (lat > 0.73) then
+			elseif (_lat > 0.73 or _lat < -0.66) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_TUNDRA_MOUNTAIN;
 
