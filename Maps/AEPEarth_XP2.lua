@@ -1270,7 +1270,7 @@ function AddFeatures()
 	-- Get Rainfall setting input by user.
 	local rainfall = MapConfiguration.GetValue("rainfall");
 	
-	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40, iIcePercent = 15}	-- no rainforest
+	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40, iIcePercent = 12}	-- no rainforest
 	featuregen = FeatureGenerator.Create(args);
 
 	featuregen:AddFeatures(true, true);  --second parameter is whether or not rivers start inland);
@@ -1545,14 +1545,14 @@ function FeatureGenerator:AddIceToMap()
 
 	print ("Permanent Ice Tiles: " .. tostring(iPermanentIceTiles));
 
-	local iPercentNeeded = 50;
+	local iPercentNeeded = iPermanentIceTiles / iTargetIceTiles * 100;
 
 	-- poles
 	for x = 0, self.iGridW - 1, 1 do
 		for y = self.iGridH - 1, 0, -1 do
 			local _lat = _GetRadialLatitudeAtPlot(earth, x, y);
 
-			if (_lat > 0.83 or _lat < -0.073) then
+			if (_lat > 0.83 or _lat < -0.66) then
 				local i = y * self.iGridW + x;
 
 				local plot = Map.GetPlotByIndex(i);
@@ -1620,28 +1620,25 @@ function FeatureGenerator:AddIceToMap()
 	end
 end
 
--- override: circular poles
+-- override: radial poles
 function AddIceAtPlot(plot, iX, iY, iE)
 	local _lat = _GetRadialLatitudeAtPlot(earth, iX, iY);
 	local lat = math.abs(_lat);
 	
-	-- more south polar ice
-	if (_lat > 0.66 or _lat < - 0.6) then
-		local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
+	local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
 
-		iScore = iScore + lat * 100;
+	iScore = iScore + (lat * 100);
 
-		if(IsAdjacentToLandPlot(iX,iY) == true) then
-			iScore = iScore / 2.0;
-		end
+	if(IsAdjacentToLandPlot(iX,iY) == true) then
+		iScore = iScore / math.sqrt(2.0);			-- only difference from non-radial map
+	end
 
-		local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_ICE);
-		iScore = iScore + 10.0 * iAdjacent;
+	local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_ICE);
+	iScore = iScore + 10.0 * iAdjacent;
 
-		if(iScore > 130) then
-			TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
-			TerrainBuilder.AddIce(plot:GetIndex(), iE); 
-		end
+	if(iScore > 130) then
+		TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
+		TerrainBuilder.AddIce(plot:GetIndex(), iE); 
 	end
 end
 
