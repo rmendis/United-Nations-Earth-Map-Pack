@@ -251,9 +251,8 @@ function GenerateMap()
 	local biggest_area = Areas.FindBiggestArea(false);
 	print("After Adding Hills: ", biggest_area:GetPlotCount());
 
-	-- Place lakes before rivers to allow them to act as sources for rivers
-	local numLargeLakes = GameInfo.Maps[Map.GetMapSize()].Continents;
-	AddLakes(numLargeLakes);
+	-- no large lakes
+	AddLakes();
 
 	-- River generation is affected by plot types, originating from highlands and preferring to traverse lowlands.
 	AddRivers();
