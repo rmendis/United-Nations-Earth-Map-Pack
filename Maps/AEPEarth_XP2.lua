@@ -1097,7 +1097,7 @@ function GenerateMap()
 
 	AddFeatures();
 
-	--TerrainBuilder.AnalyzeChokepoints();   -- commented out as now WorldBuilder template map
+	TerrainBuilder.AnalyzeChokepoints();   -- commented out as now WorldBuilder template map
 	
 	print("Adding cliffs");
 	AddCliffs(plotTypes, terrainTypes);

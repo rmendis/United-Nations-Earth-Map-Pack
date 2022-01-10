@@ -511,7 +511,7 @@ function GenerateMap()
 	local nwGen = NaturalWonderGenerator.Create(args);
 
 	AreaBuilder.Recalculate();
-	--TerrainBuilder.AnalyzeChokepoints();
+	TerrainBuilder.AnalyzeChokepoints();
 	TerrainBuilder.StampContinents();
 	
 	local resourcesConfig = MapConfiguration.GetValue("resources");

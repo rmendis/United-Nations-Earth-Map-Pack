@@ -288,7 +288,7 @@ function GenerateMap()
 
 	AddFeatures();
 
-	--TerrainBuilder.AnalyzeChokepoints();
+	TerrainBuilder.AnalyzeChokepoints();
 	
 	print("Adding cliffs");
 	AddCliffs(plotTypes, terrainTypes);
