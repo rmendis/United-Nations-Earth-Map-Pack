@@ -17,9 +17,13 @@ include "ResourceGenerator"
 include "CoastalLowlands"
 include "AssignTrueStartingPlots"
 
+local earth = nil;
+
 -- north pole
 local g_CenterX = 1;
 local g_CenterY = -31;
+
+local g_iE = 70.6;			-- approx. distance to equator from north pole (measured from image of map)
 
 -- TSLs in polar coords (deg) from N.P.
 local g_TSLs = {
@@ -284,7 +288,7 @@ function GenerateMap()
 
 	AddFeatures();
 
-	TerrainBuilder.AnalyzeChokepoints();
+	--TerrainBuilder.AnalyzeChokepoints();
 	
 	print("Adding cliffs");
 	AddCliffs(plotTypes, terrainTypes);
@@ -426,7 +430,7 @@ function AddFeatures()
 	-- Get Rainfall setting input by user.
 	local rainfall = MapConfiguration.GetValue("rainfall");
 	
-	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40}	-- no rainforest
+	local args = {rainfall = rainfall, iJunglePercent = 40, iMarshPercent = 7, iForestPercent = 40, iIcePercent = 12};
 	featuregen = FeatureGenerator.Create(args);
 
 	featuregen:AddFeatures(true, true);  --second parameter is whether or not rivers start inland);
@@ -465,36 +469,42 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 	for iX = 0, iW - 1 do
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
-
-			local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);
+			local _lat = _GetRadialLatitudeAtPlot(earth, iX, iY);
+			local lat = math.abs(_lat);
 			local iAzimuth = Azimuth(iX, iY, g_CenterX, g_CenterY);
-
-			local iSnowTop = earth:GetHeight(100);	
-			local iSnowBottom = earth:GetHeight(75);
-											
-			local iTundraTop = earth:GetHeight(75);										
-			local iTundraBottom = earth:GetHeight(50);
-
-			local iPlainsTop = earth:GetHeight(50);
-			local iPlainsBottom = earth:GetHeight(15);
-
-			local iDesertTop = earth:GetHeight(15);
-			local iDesertBottom = earth:GetHeight(3);
-
-			local iGrassTop = earth:GetHeight(3);
-			local iGrassBottom = earth:GetHeight(0);
-
 			local earthVal = earth:GetHeight(iX, iY);
 
-			-- north pole
-			if (iDistanceFromCenter < 15 or iDistanceFromCenter > 115) then
+			-- 12% snow
+			local iSnowTop = earth:GetHeight(100);	
+			local iSnowBottom = earth:GetHeight(88);
+				
+			-- 10% tundra							
+			local iTundraTop = iSnowBottom;										
+			local iTundraBottom = earth:GetHeight(78);
+
+										  
+											 
+
+			local iPlainsTop = iTundraBottom;
+			local iPlainsBottom = earth:GetHeight(53);
+
+			local iGrassTop = iPlainsBottom;
+			local iGrassBottom = earth:GetHeight(33);
+
+			-- 33% desert
+			local iDesertTop = iGrassBottom;
+			local iDesertBottom = earth:GetHeight(0);
+
+			-- antarctica and north pole
+			if (_lat < -0.7 or _lat > 0.83) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 				elseif (plotTypes[index] ~= g_PLOT_TYPE_OCEAN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW;
 				end
 
-			elseif (iDistanceFromCenter < 20 or iDistanceFromCenter > 110) then
+			-- arctic circle and patagonia
+			elseif (_lat > 0.73 or _lat < -0.66) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
@@ -510,16 +520,16 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				end
 
 			-- Australia, Sahara & Arabia
-			elseif ((iDistanceFromCenter > 80 and iDistanceFromCenter < 103 and iAzimuth > 22 and iAzimuth < 64)
-					or (iDistanceFromCenter > 44 and iDistanceFromCenter < 66 and iAzimuth > -109 and iAzimuth < -31)) then
-				-- desert
+			elseif ((_lat < -0.11 and _lat > -0.48 and iAzimuth > 22 and iAzimuth < 64)
+					or (_lat < 0.41 and _lat > 0.13 and iAzimuth > -109 and iAzimuth < -31)) then
+			 
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(97);
 				
-				iPlainsTop = earth:GetHeight(97);
+				iPlainsTop = iGrassBottom;
 				iPlainsBottom = earth:GetHeight(90);
 
-				iDesertTop = earth:GetHeight(90);
+				iDesertTop = iPlainsBottom;
 				iDesertBottom = earth:GetHeight(0);
 
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
@@ -540,8 +550,8 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					end
 				end
 
-			-- arctic circle
-			elseif (iDistanceFromCenter < 25 or iDistanceFromCenter > 105) then
+			-- grassland not found further north than 60 deg.
+			elseif (lat > 0.66) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_SNOW_MOUNTAIN;
 
@@ -561,14 +571,16 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 					end
 				end
 			
-			-- southeast asia & central america
-			elseif (iDistanceFromCenter > 48 or iDistanceFromCenter < 80) then
+			-- tropics
+			elseif (lat < 0.26) then
 				-- rainforest
 				iGrassTop = earth:GetHeight(100);
 				iGrassBottom = earth:GetHeight(30);
 																		
-				iPlainsTop = earth:GetHeight(30);
-				iPlainsBottom = earth:GetHeight(10);
+				iPlainsTop = iGrassBottom;
+				iPlainsBottom = earth:GetHeight(5);
+
+				iDesertTop = iPlainsBottom;
 
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_DESERT_MOUNTAIN;
@@ -590,7 +602,7 @@ function GenerateTerrainTypesEarth(plotTypes, iW, iH, iFlags, bNoCoastalMountain
 				end
 
 			-- central eurasia and north america
-			elseif (iDistanceFromCenter < 35 or iDistanceFromCenter > 90) then
+			elseif (lat > 0.44) then
 				if (plotTypes[index] == g_PLOT_TYPE_MOUNTAIN) then
 					terrainTypes[index] = g_TERRAIN_TYPE_GRASS_MOUNTAIN;
 
@@ -697,18 +709,22 @@ function FeatureGenerator:AddIceToMap()
 
 	print ("Permanent Ice Tiles: " .. tostring(iPermanentIceTiles));
 
-	local iPercentNeeded = 75;
+	local iPercentNeeded = iPermanentIceTiles / iTargetIceTiles * 100;
 
-	-- antarctic ice sheet core
+	-- poles
 	for x = 0, self.iGridW - 1, 1 do
 		for y = self.iGridH - 1, 0, -1 do
-			local i = y * self.iGridW + x;
+			local _lat = _GetRadialLatitudeAtPlot(earth, x, y);
 
-			local plot = Map.GetPlotByIndex(i);
-			if (plot ~= nil) then
-				if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_ICE) == true and IsAdjacentToLandPlot(x, y) == false) then
-					if (TerrainBuilder.GetRandomNumber(100, "Permanent Ice") <= iPercentNeeded) then
-						AddIceAtPlot(plot, x, y, -1); 
+			if (_lat > 0.83 or _lat < -0.66) then
+				local i = y * self.iGridW + x;
+
+				local plot = Map.GetPlotByIndex(i);
+				if (plot ~= nil) then
+					if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_ICE) == true and IsAdjacentToLandPlot(x, y) == false) then
+						if (TerrainBuilder.GetRandomNumber(100, "Permanent Ice") <= iPercentNeeded) then
+							AddIceAtPlot(plot, x, y, -1); 
+						end
 					end
 				end
 			end
@@ -768,44 +784,47 @@ function FeatureGenerator:AddIceToMap()
 	end
 end
 
-------------------------------------------------------------------------------
+-- override: radial poles
 function AddIceAtPlot(plot, iX, iY, iE)
-	local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
-	local iV = TerrainBuilder.GetRandomNumber(8, "Random variance");
+	local _lat = _GetRadialLatitudeAtPlot(earth, iX, iY);
+	local lat = math.abs(_lat);
 	
-	if (iDistanceFromCenter + iV < 26 or iDistanceFromCenter + iV > 113) then
-		local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
+																		  
+	local iScore = TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust");
 
-		iScore = iScore + math.abs(((68 - iDistanceFromCenter)/68)) * 100;		-- 68 is approx. half max. dist. from center
+	iScore = iScore + (lat * 100);
 
-		if(IsAdjacentToLandPlot(iX,iY) == true) then
-			iScore = iScore / 1.42;
-		end
-
-		local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_ICE);
-		iScore = iScore + 10.0 * iAdjacent;
-
-		if(iScore > 130) then
-			TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
-			TerrainBuilder.AddIce(plot:GetIndex(), iE); 
-		end
+	if(IsAdjacentToLandPlot(iX,iY) == true) then
+		iScore = iScore / math.sqrt(2.0);			-- only difference from non-radial map
 	end
 
-	return false;
+	local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_ICE);
+	iScore = iScore + 10.0 * iAdjacent;
+
+	if(iScore > 130) then
+		TerrainBuilder.SetFeatureType(plot, g_FEATURE_ICE);
+		TerrainBuilder.AddIce(plot:GetIndex(), iE); 
+	 
+	end
+
+			  
 end
 
 -- override: for a radial equator 
+------------------------------------------------------------------------------
 function FeatureGenerator:AddJunglesAtPlot(plot, iX, iY)
-	--Jungle Check. First see if it can place the feature.
+	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+
+	--Jungle Check. First see if it can place the feature.	
 	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_JUNGLE)) then
 		if(math.ceil(self.iJungleCount * 100 / self.iNumLandPlots) <= self.iJungleMaxPercent) then
-			local iEquator = 72;		-- approx. measurement from sat. img
-			local iJungleBottom = iEquator -  math.ceil(self.iJungleMaxPercent * 0.5);
-			local iJungleTop = iEquator +  math.ceil(self.iJungleMaxPercent * 0.5);
+			if(lat < 0.26) then		-- tropics 
+																			 
+																		  
 
-			local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
+																						 
 
-			if(iDistanceFromCenter >= iJungleBottom  and iDistanceFromCenter <= iJungleTop) then 
+																						
 				--Weight based on adjacent plots if it has more than 3 start subtracting
 				local iScore = 300;
 				local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_JUNGLE);
@@ -841,17 +860,20 @@ function FeatureGenerator:AddJunglesAtPlot(plot, iX, iY)
 
 	return false
 end
+
 ------------------------------------------------------------------------------
 function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
+	local lat = GetRadialLatitudeAtPlot(earth, iX, iY);
+
 	--Reef Check. First see if it can place the feature.
-	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_REEF)) then
+	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_REEF) and lat < 0.38) then		-- northern most reefs
 		self.iNumReefablePlots = self.iNumReefablePlots + 1;
 		if(math.ceil(self.iReefCount * 100 / self.iNumReefablePlots) <= self.iReefMaxPercent) then
-				local iDistanceFromCenter = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);	-- radial
+																						  
 
 				--Weight based on adjacent plots
-				local iEquator = 72;		-- approx. measurement from sat. img
-				local iScore  = 3 * math.abs(72 - iDistanceFromCenter);
+															  
+				local iScore  = 3 * g_iE * lat;
 				local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_REEF);
 
 				if(iAdjacent == 0 ) then
@@ -888,5 +910,42 @@ end
 
 -- the angle of (iX1, iY1) relative to (iX0, iY0) in degrees
 function Azimuth(iX1, iY1, iX0, iY0)
-	return math.deg(math.atan2(iY1-iY0, iX1-iX0));
+	return math.deg(_Azimuth(iX1, iY1, iX0, iY0));
+end
+
+-- the angle of (iX1, iY1) relative to (iX0, iY0)
+function _Azimuth(iX1, iY1, iX0, iY0)
+	return math.atan2(iY1-iY0, iX1-iX0);
+end
+
+----------------------------------------------------------------------------------
+-- LATITUDE LOOKUP
+----------------------------------------------------------------------------------
+function _GetRadialLatitudeAtPlot(variationFrac, iX, iY)
+	local iZ = __GetPlotDistance(iX, iY, g_CenterX, g_CenterY);		-- radial distance from center
+
+	if (iZ < 2*g_iE) then
+		-- Terrain bands are governed by latitude (in rad).
+		local _lat = 1/2 - iZ/(2*g_iE);
+
+		-- Returns a latitude value between 0.0 (tropical) and +/-1.0 (polar).
+		local lat = 2 * _lat;
+	
+		-- Adjust latitude using variation fractal, to roughen the border between bands:
+		-- lessen the variation at south pole
+		lat = lat + (128 - variationFrac:GetHeight(iX, iY))/(255.0 * 5.0) * (1 - iZ/(2*g_iE));
+
+		-- Limit to the range [-1, 1]:
+		lat = math.clamp(lat, -1, 1);
+	
+		return lat;
+	else
+		-- off the map (south pole) 
+		return -1;
+	end
+end
+
+-- Returns a latitude value between 0.0 (tropical) and 1.0 (polar).
+function GetRadialLatitudeAtPlot(variationFrac, iX, iY)
+	return math.abs(_GetRadialLatitudeAtPlot(variationFrac, iX, iY));
 end
