@@ -30,7 +30,7 @@
 			<Text>An internally randomized map of The New World based on the AEP of Earth. (109x97)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_ANCIENT_WORLD_NAME">
-			<Text>The Ancient World (AEP)</Text>
+			<Text>The Old World (AEP)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_ANCIENT_WORLD_DESCRIPTION">
 			<Text>An internally randomized map of The Ancient World based on the AEP of Earth. (95x128)</Text>
@@ -54,7 +54,7 @@
 			<Text>An internally randomized map of The New World based on the AEP of Earth with true starts. (109x97)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_ANCIENT_WORLD_NAME">
-			<Text>True Start Location The Ancient World (AEP)</Text>
+			<Text>True Start Location The Old World (AEP)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_ANCIENT_WORLD_DESCRIPTION">
 			<Text>An internally randomized map of The Ancient World based on the AEP of Earth with true starts. (95x128)</Text>
