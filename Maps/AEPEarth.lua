@@ -1076,7 +1076,7 @@ function GenerateMap()
 	local nwGen = NaturalWonderGenerator.Create(args);
 
 	AreaBuilder.Recalculate();
-	--TerrainBuilder.AnalyzeChokepoints();   -- WorldBuilder Only: re-enable if super size maps get supported
+	TerrainBuilder.AnalyzeChokepoints();   -- WorldBuilder Only: re-enable if super size maps get supported
 	TerrainBuilder.StampContinents();
 	
 	local resourcesConfig = MapConfiguration.GetValue("resources");
