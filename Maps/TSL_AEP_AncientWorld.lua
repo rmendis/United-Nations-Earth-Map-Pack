@@ -33,6 +33,7 @@ local g_TSLs = {
 	--LEADER_MINOR_CIV_SEOUL = {40, 36},
 	-- LEADER_MINOR_CIV_PALENQUE cannot be placed cos of proximity to La Venta
 	LEADER_SALADIN = {47.5, -59.7},
+	LEADER_SALADIN_ALT = {47.5, -59.7},
 	LEADER_CLEOPATRA = {47, -60.7},
 	LEADER_VICTORIA = {31, -91.8},
 	LEADER_CATHERINE_DE_MEDICI = {35, -91.6},
