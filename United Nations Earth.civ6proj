@@ -5,7 +5,7 @@
     <Name>United Nations Earth Maps Pack</Name>
     <Guid>0d260de6-56dc-4704-9486-1e532e1432bd</Guid>
     <ProjectGuid>72ec5dcf-1f24-44a6-b286-23eb132045c3</ProjectGuid>
-    <ModVersion>36</ModVersion>
+    <ModVersion>37</ModVersion>
     <Teaser>Internally randomized maps of the United Nations Earth.</Teaser>
     <Description>Internally randomized maps pack of the United Nations map of Earth. An Azimuthal Equidistant Projection (AEP) of Earth with approx. 70% water and Antarctica inhabitably frozen.[NEWLINE][NEWLINE]Maps marked in [COLOR_RED]Red[ENDCOLOR] are likely not supported map sizes in Civ VI.[NEWLINE][NEWLINE][COLOR_Civ6Yellow]TSL available on Oceania (for Gathering Storm only), on The New World and The Old World.[ENDCOLOR]</Description>
     <Authors>blkbutterfly74</Authors>
