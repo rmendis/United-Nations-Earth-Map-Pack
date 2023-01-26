@@ -136,7 +136,7 @@ local g_TSLs = {
 	LEADER_KUBLAI_KHAN_CHINA = {36.4, 31.5},
 	LEADER_YONGLE = {36.4, 31.5},
 	LEADER_KUBLAI_KHAN_MONGOLIA = {36.4, 31.5},
-
+	LEADER_WU_ZETIAN = {43.4, 26.0},
 	--LEADER_MINOR_CIV_AKKAD	--blocked by Babylon and Sumeria
 	LEADER_MINOR_CIV_BOLOGNA = {36.5, -80.5},
 	--LEADER_MINOR_CIV_CARDIFF = {30.1, -93.81},	-- blocked by England
