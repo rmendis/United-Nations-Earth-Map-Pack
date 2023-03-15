@@ -24,37 +24,37 @@
 			<Text>The bottom hemisphere of an internally randomized map of United Nations Earth. (198x94)[NEWLINE][ICON_Exclamation] [COLOR_RED]UNSTABLE in late game[ENDCOLOR][NEWLINE]Lower your graphic options to reduce random crashes.[NEWLINE]6+ GB of VRAM recommended</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_NEW_WORLD_NAME">
-			<Text>The New World (AEP)</Text>
+			<Text>The New World</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_NEW_WORLD_DESCRIPTION">
 			<Text>An internally randomized map of The New World based on the AEP of Earth. (109x97)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_ANCIENT_WORLD_NAME">
-			<Text>The Old World (AEP)</Text>
+			<Text>The Old World</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_ANCIENT_WORLD_DESCRIPTION">
 			<Text>An internally randomized map of The Ancient World based on the AEP of Earth. (95x128)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_OCEANIA_NAME">
-			<Text>Oceania (AEP)</Text>
+			<Text>Oceania</Text>
 		</Row>
 		<Row Tag="LOC_MAP_AEP_OCEANIA_DESCRIPTION">
 			<Text>An internally randomized map of Oceania based on the AEP of Earth. (90x73)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_OCEANIA_NAME">
-			<Text>True Start Location Oceania (AEP)</Text>
+			<Text>True Start Location Oceania</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_OCEANIA_DESCRIPTION">
 			<Text>An internally randomized map of Oceania based on the AEP of Earth with true starts. (90x73)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_NEW_WORLD_NAME">
-			<Text>True Start Location New World (AEP)</Text>
+			<Text>True Start Location New World</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_NEW_WORLD_DESCRIPTION">
 			<Text>An internally randomized map of The New World based on the AEP of Earth with true starts. (109x97)</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_ANCIENT_WORLD_NAME">
-			<Text>True Start Location Old World (AEP)</Text>
+			<Text>True Start Location Old World</Text>
 		</Row>
 		<Row Tag="LOC_MAP_TSL_AEP_ANCIENT_WORLD_DESCRIPTION">
 			<Text>An internally randomized map of The Ancient World based on the AEP of Earth with true starts. (95x128)</Text>
